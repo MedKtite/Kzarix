@@ -42,6 +42,7 @@ public class User implements UserDetails {
 
     public User() {
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -65,6 +66,11 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled ;
+    }
+
+    @Override
+    public String getUsername() {
+        return password;
     }
 
 }
