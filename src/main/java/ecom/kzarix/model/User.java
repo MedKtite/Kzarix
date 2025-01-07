@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,32 +16,29 @@ import java.util.List;
 @Setter
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(unique = true, nullable = false)
     private String username;
-
     @Column(unique = true, nullable = false)
     private String email;
-
     @Column(nullable = false)
     private String password;
-    private boolean enabled;
 
     @Column(name = "verification_code")
     private String verificationCode;
+    @Column(name = "verification_expiration")
+    private LocalDateTime verificationCodeExpiresAt;
+    private boolean enabled;
 
-    @Column(name= "verification_expiration")
-    private Long verificationExpiration;
-
+    //constructor for creating an unverified user
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
-    public User() {
+    //default constructor
+    public User(){
     }
 
     @Override
@@ -48,6 +46,7 @@ public class User implements UserDetails {
         return List.of();
     }
 
+    //TODO: add proper boolean checks
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -65,12 +64,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled ;
+        return enabled;
     }
-
-    @Override
-    public String getUsername() {
-        return password;
-    }
-
 }
