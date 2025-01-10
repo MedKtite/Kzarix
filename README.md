@@ -16,6 +16,12 @@ Kzarix is an e-commerce platform that caters to the growing needs of IT enthusia
 - **Gaming & Tech-Centric**: With its bold, sharp sound, Kzarix speaks to gamers, developers, and tech enthusiasts looking to express their passions through functional, high-quality products.
 - **Creative & Custom**: The brand promotes individuality, offering unique, customizable products that reflect the personality of each customer. Whether it’s a custom-designed mug or a personalized desk accessory, Kzarix is about standing out and making your digital and physical space truly your own.
 
-## Getting Started
+## Technologies Used 
 
-To get started with the Kzarix e-commerce platform, follow these steps:
+- **Backend**: Spring Boot, Spring Security, Spring Data JPA
+- **Frontend**: Angular
+- **Database**: PostgreSQL
+- **Authentication**: JWT, OAuth2 (Google)
+- **Build Tool**: Maven
+- **Other**: Thymeleaf, Jakarta Servlet API, JavaMailSender
+
