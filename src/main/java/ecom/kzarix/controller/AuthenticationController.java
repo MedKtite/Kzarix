@@ -58,7 +58,7 @@ public class AuthenticationController {
         }
     }
 
-    @GetMapping("localhost:4200/")
+    @GetMapping("/oauth2")
     public String home(Model model, @AuthenticationPrincipal OAuth2User principal) {
         model.addAttribute("name", principal.getAttribute("name"));
         return "home";
