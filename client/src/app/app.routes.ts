@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { VerifyComponent } from './auth/verify/verify.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 
 export const routes: Routes = [
 
@@ -16,7 +17,8 @@ export const routes: Routes = [
   { path: 'auth', component: AuthComponent, children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SingUpComponent },
-      {path:'verify', component: VerifyComponent}
+      {path:'verify', component: VerifyComponent},
+      {path:'forgot-password', component: ForgetPasswordComponent}
     ]
   }
 ];

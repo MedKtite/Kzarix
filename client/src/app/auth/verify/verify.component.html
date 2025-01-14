@@ -1,7 +1,9 @@
-<div>
-    <div><h1 class="text-accent-offwhite text-9xl font-light italic">Kzarix</h1></div>
-    
-    <h1>Your Account verified successfully</h1>
-    <p>Now you can login to your account</p>
-    <a routerLink="/auth/login" class="btn btn-primary">Login</a>
+<div class="flex flex-col items-center justify-center h-screen gap-8">
+
+    <h1 class="text-[#137e83] text-5xl font-medium">Your Account verified successfully</h1>
+    <div>
+        <fa-icon [icon]="['fas', 'check-circle']" class="text-[#137e83] text-6xl"></fa-icon>
+    </div>
+    <p class="font-sans font-medium teext-xl text-gray/80">Now you can login to your account</p>
+    <button routerLink="/auth/login" class="bg-accent-blue py-2 w-32 text-white font-sans font-medium">Login</button>
 </div>

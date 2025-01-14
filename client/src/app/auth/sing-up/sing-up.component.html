@@ -10,10 +10,21 @@
                 <h3 class="text-gray text-md font-medium">Email</h3>
                 <input class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md " type="text" id="email" name="email" placeholder="Enter your Email here">
             </div>
-            <div id="password" class="flex flex-col gap-2">
-                <h3  class="text-gray text-md font-medium">Password</h3>
-                <input class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md " type="password" id="password" name="password" placeholder="Enter your Password here">
-            </div>
+            <div id="password" class="flex flex-col gap-2 relative ">
+                <h3 class="text-gray text-md font-medium">Password</h3>
+                <input 
+                  class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md pr-10" 
+                  [type]="isPasswordVisible ? 'text' : 'password'" 
+                  id="password" 
+                  name="password" 
+                  placeholder="Enter your Password here" />
+                <button 
+                  type="button" 
+                  (click)="togglePasswordVisibility()" 
+                  class="absolute right-2 top-1/2 transform translate-y-[15%]">
+                  <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </button>
+              </div>
             <button type="submit" class="bg-accent-blue p-4 w-48 text-white font-sans font-medium mt-8 ">Create Account</button>
             <p class="mt-4">Already have an account? <span class="text-accent-blue font-semibold">Log in</span></p>
         </form>
