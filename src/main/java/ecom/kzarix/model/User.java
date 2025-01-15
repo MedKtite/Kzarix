@@ -27,9 +27,18 @@ public class User implements UserDetails {
 
     @Column(name = "verification_code")
     private String verificationCode;
+
     @Column(name = "verification_expiration")
     private LocalDateTime verificationCodeExpiresAt;
     private boolean enabled;
+
+    // Reset Password
+    @Column(name = "reset_token")
+    private String resetToken;
+    @Column(name = "reset_token_expiration")
+    private LocalDateTime resetTokenExpiresAt;
+    @Column(name = "password_reset_code")
+    private String passwordResetCode;
 
     //constructor for creating an unverified user
     public User(String username, String email, String password) {
@@ -43,10 +52,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return List.of();
     }
 
     //TODO: add proper boolean checks
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

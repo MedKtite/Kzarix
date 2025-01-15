@@ -1,0 +1,68 @@
+<div class="flex">
+    <div class="flex flex-col gap-8 w-1/2 justify-center items-center h-screen">
+        <h1 class="font-sans font-medium text-gray text-5xl pb-12">Welcome to Kzarix</h1>
+        <!-- form -->
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-4">
+            <div id="username" class="flex flex-col gap-2">
+                <h3 class="text-gray text-md font-medium">Username</h3>
+                <input class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md" type="text" id="username" formControlName="username" placeholder="John Doe" required>
+            </div>
+            <!-- Email -->
+            <div id="email" class="flex flex-col gap-2">
+                <h3 class="text-gray text-md font-medium">Email</h3>
+                <input class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md" type="text" id="email" formControlName="email" placeholder="Enter your Email here">
+            </div>
+            <!-- Password -->
+            <div id="password" class="flex flex-col gap-2 relative">
+                <h3 class="text-gray text-md font-medium">Password</h3>
+                <input 
+                  class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md pr-10" 
+                  [type]="isPasswordVisible ? 'text' : 'password'" 
+                  id="password" 
+                  formControlName="password" 
+                  placeholder="Enter your Password here" />
+                <button 
+                  type="button" 
+                  (click)="togglePasswordVisibility()" 
+                  class="absolute right-2 top-1/2 transform translate-y-[15%]">
+                  <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </button>
+            </div>
+            <!-- Confirm Password -->
+            <div id="confirmPassword" class="flex flex-col gap-2 relative">
+                <h3 class="text-gray text-md font-medium">Confirm Password</h3>
+                <input 
+                  class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md pr-10" 
+                  [type]="isPasswordVisible ? 'text' : 'password'" 
+                  id="confirmPassword" 
+                  formControlName="confirmPassword" 
+                  placeholder="Confirm your Password here" />
+                <button 
+                  type="button" 
+                  (click)="togglePasswordVisibility()" 
+                  class="absolute right-2 top-1/2 transform translate-y-[15%]">
+                  <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </button>
+            </div>
+            <div *ngIf="signUpForm.value.password !== signUpForm.value.confirmPassword && signUpForm.touched" class="text-red-500">
+                Passwords do not match
+            </div>
+            <button type="submit" class="bg-accent-blue p-4 w-48 text-white font-sans font-medium mt-8" [disabled]="signUpForm.invalid">Create Account</button>
+            <p class="mt-4">Already have an account? <span class="text-accent-blue font-semibold">Log in</span></p>
+        </form>
+
+        <div class="flex gap-4">
+            <button class="flex items-center gap-2 p-2 bg-white border rounded-md shadow-md">
+                <fa-icon [icon]="['fab', 'google']" class="text-accent-blue text-3xl"></fa-icon> Sign up with Google
+            </button>
+            <button class="flex items-center gap-2 p-2 bg-white border rounded-md shadow-md">
+                <fa-icon [icon]="['fab', 'github']" class="text-accent-blue text-3xl"></fa-icon> Sign up with Github
+            </button>
+        </div>
+    </div>
+
+    <!-- Other Side -->
+    <div class="h-screen text-center bg-black w-1/2 flex justify-center items-center">
+        <h1 class="text-accent-offwhite text-9xl font-light italic">Kzarix</h1>
+    </div>
+</div>

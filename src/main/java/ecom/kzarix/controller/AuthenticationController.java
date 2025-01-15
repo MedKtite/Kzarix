@@ -1,8 +1,6 @@
 package ecom.kzarix.controller;
 
-import ecom.kzarix.dto.LoginUserDto;
-import ecom.kzarix.dto.RegisterUserDto;
-import ecom.kzarix.dto.VerifyUserDto;
+import ecom.kzarix.dto.*;
 import ecom.kzarix.model.User;
 import ecom.kzarix.response.LoginResponse;
 import ecom.kzarix.service.AuthenticationService;
@@ -12,6 +10,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RequestMapping("/auth")
 @RestController
@@ -38,15 +39,18 @@ public class AuthenticationController {
         return ResponseEntity.ok(loginResponse);
     }
 
-    @PostMapping("/verify")
-    public ResponseEntity<?> verifyUser(@RequestBody VerifyUserDto verifyUserDto) {
-        try {
-            authenticationService.verifyUser(verifyUserDto);
-            return ResponseEntity.ok("Account verified successfully");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+@PostMapping("/verify")
+public ResponseEntity<Map<String, String>> verifyUser(@RequestBody VerifyUserDto verifyUserDto) {
+    Map<String, String> response = new HashMap<>();
+    try {
+        authenticationService.verifyUser(verifyUserDto);
+        response.put("message", "Account verified successfully");
+        return ResponseEntity.ok(response);
+    } catch (RuntimeException e) {
+        response.put("error", e.getMessage());
+        return ResponseEntity.badRequest().body(response);
     }
+}
 
     @PostMapping("/resend")
     public ResponseEntity<?> resendVerificationCode(@RequestParam String email) {
@@ -64,4 +68,29 @@ public class AuthenticationController {
         return "home";
     }
 
-}
+
+    // Password Reset
+    
+    @PostMapping("/password-reset-request")
+    public ResponseEntity<?> requestPasswordReset(@RequestBody PasswordRestRequestDto request) {
+        try {
+            authenticationService.requestPasswordReset(request);
+            return ResponseEntity.ok("Password reset token sent to email");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/password-reset")
+    public ResponseEntity<?> resetPassword(@RequestBody PasswordRestDto resetDto) {
+        try {
+            authenticationService.restPassword(resetDto);
+            return ResponseEntity.ok("Password reset successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+
+        }
+    }
+
+    }

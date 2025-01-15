@@ -1,8 +1,6 @@
 package ecom.kzarix.service;
 
-import ecom.kzarix.dto.LoginUserDto;
-import ecom.kzarix.dto.RegisterUserDto;
-import ecom.kzarix.dto.VerifyUserDto;
+import ecom.kzarix.dto.*;
 import ecom.kzarix.model.User;
 import ecom.kzarix.repositories.UserRepository;
 import jakarta.mail.MessagingException;
@@ -10,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -103,7 +102,7 @@ public class AuthenticationService {
         String htmlMessage = "<html>"
                 + "<body style=\"font-family: Arial, sans-serif;\">"
                 + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
-                + "<h2 style=\"color: #333;\">Welcome to our app!</h2>"
+                + "<h2 style=\"color: #333;\">Welcome to Kzarix!</h2>"
                 + "<p style=\"font-size: 16px;\">Please enter the verification code below to continue:</p>"
                 + "<div style=\"background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">"
                 + "<h3 style=\"color: #333;\">Verification Code:</h3>"
@@ -120,6 +119,63 @@ public class AuthenticationService {
             e.printStackTrace();
         }
     }
+
+    // Password Reset Request
+    public void requestPasswordReset (PasswordRestRequestDto request) {
+        Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+           user.setResetToken(generateVerificationCode());
+           user.setResetTokenExpiresAt(LocalDateTime.now().plusMinutes(15));
+           sendResetEmail(user);
+           userRepository.save(user);
+
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+
+    // Password Reset
+    public void restPassword(PasswordRestDto restDto) {
+        Optional<User> optionalUser = userRepository.findByResetToken(restDto.getToken());
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getResetTokenExpiresAt().isBefore(LocalDateTime.now())) {
+                throw new RuntimeException("Token has expired");
+            }
+            user.setPassword(passwordEncoder.encode(restDto.getNewPassword()));
+            user.setResetToken(null);
+            user.setResetTokenExpiresAt(null);
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("Invalid token");
+        }
+    }
+
+    private void sendResetEmail(User user) {
+        String subject = "Password Reset Request";
+        String resetToken = "RESET TOKEN " + user.getResetToken();
+        String htmlMessage = "<html>"
+                + "<body style=\"font-family: Arial, sans-serif;\">"
+                + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
+                + "<h2 style=\"color: #333;\">Password Reset Request</h2>"
+                + "<p style=\"font-size: 16px;\">Please use the reset token below to reset your password:</p>"
+                + "<div style=\"background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">"
+                + "<h3 style=\"color: #333;\">Reset Token:</h3>"
+                + "<p style=\"font-size: 18px; font-weight: bold; color: #007bff;\">" + resetToken + "</p>"
+                + "</div>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
+
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), subject, htmlMessage);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private String generateVerificationCode() {
         Random random = new Random();

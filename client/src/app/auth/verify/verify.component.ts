@@ -1,19 +1,60 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VerifyService } from './verify.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+import { CommonModule } from '@angular/common';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-verify',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule],
   templateUrl: './verify.component.html',
-  styleUrl: './verify.component.scss'
+  styleUrls: ['./verify.component.scss']
 })
-export class VerifyComponent {
-    constructor(library: FaIconLibrary) { 
-      library.addIconPacks(fas, fab);
-    }
+export class VerifyComponent implements OnInit {
+  verifyForm: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private verifyService: VerifyService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.verifyForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      verificationCode: ['', Validators.required]
+    });
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.verifyForm.patchValue({
+        email: params['email'],
+        verificationCode: params['code']
+      });
+    });
+  }
+
+onSubmit() {
+  if (this.verifyForm.valid) {
+    const formData = this.verifyForm.value;
+    console.log('Form Data:', formData);
+    this.verifyService.verify(formData).pipe(
+      tap(response => {
+        console.log('Response:', response);
+        alert('Account verified successfully');
+        this.router.navigate(['/auth/login']).then(r => console.log('Navigated:', r));
+      }),
+      catchError(error => {
+        console.error('Error:', error);
+        alert('Verification failed: ' + error.message);
+        return of(null);
+      })
+    ).subscribe();
+  }
+}
 }

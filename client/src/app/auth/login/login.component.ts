@@ -1,25 +1,48 @@
 import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-    constructor(library: FaIconLibrary) { 
-      library.addIconPacks(fas, fab);
-    }
+  loginForm: FormGroup;
+  isPasswordVisible: boolean = false;
 
-    isPasswordVisible: boolean = false;
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    library: FaIconLibrary
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    library.addIconPacks(fas, fab);
+  }
 
-    togglePasswordVisibility() {
-      this.isPasswordVisible = !this.isPasswordVisible;
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.http.post('http://localhost:8085/auth/login', this.loginForm.value).subscribe(
+        response => {
+          alert('Login successful');
+        },
+        error => {
+          alert('Login failed');
+        }
+      );
     }
+  }
 }

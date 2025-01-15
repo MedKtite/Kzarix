@@ -1,9 +1,14 @@
-<div class="flex flex-col items-center justify-center h-screen gap-8">
-
-    <h1 class="text-[#137e83] text-5xl font-medium">Your Account verified successfully</h1>
-    <div>
-        <fa-icon [icon]="['fas', 'check-circle']" class="text-[#137e83] text-6xl"></fa-icon>
-    </div>
-    <p class="font-sans font-medium teext-xl text-gray/80">Now you can login to your account</p>
-    <button routerLink="/auth/login" class="bg-accent-blue py-2 w-32 text-white font-sans font-medium">Login</button>
+<div class="flex flex-col items-center justify-center h-screen">
+    <h1 class="text-3xl font-bold mb-4">Verify Your Account</h1>
+    <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-4">
+        <div class="flex flex-col gap-2">
+            <label for="email" class="text-gray text-md font-medium">Email</label>
+            <input class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md" type="email" id="email" formControlName="email" placeholder="Enter your email" required>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label for="verificationCode" class="text-gray text-md font-medium">Verification Code</label>
+            <input class="w-96 p-2 bg-[#eef0f2] h-14 rounded-md" type="text" id="verificationCode" formControlName="verificationCode" placeholder="Enter your verification code" required>
+        </div>
+        <button type="submit" class="bg-accent-blue p-4 w-48 text-white font-sans font-medium mt-8" [disabled]="verifyForm.invalid">Verify</button>
+    </form>
 </div>
