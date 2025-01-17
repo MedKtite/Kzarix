@@ -6,6 +6,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { VerifyComponent } from './auth/verify/verify.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,5 +19,8 @@ export const routes: Routes = [
       { path: 'verify', component: VerifyComponent },
       { path: 'forgot-password', component: ForgetPasswordComponent }
     ]
+  },
+  {path: 'dashboard', component: DashboardComponent, 
   }
+
 ];

@@ -1,0 +1,49 @@
+<div 
+[class.collapsed]="isCollapsed"
+(mouseenter)="onMouseEnter()" 
+(mouseleave)="onMouseLeave()"
+ class='sidebar px-4 h-screen flex flex-col text-start items-center bg-primary-dark-slate'>
+  <div id="menu" class="flex items-center mt-12">
+    <ul class="flex flex-col items-start gap-8">
+      <li class="text-accent-offwhite  flex gap-3 items-center font-semibold text-sm hover:text-primary-off-white active:text-primary-off-white">
+        <i class="fas fa-tachometer-fast text-xl text-accent-offwhite"></i>
+        <a class="text-lg font-normal transition-opacity" [class.hidden]="isCollapsed" href="/dashboard">Overview</a>
+      </li>
+      <app-sub-menu [icon]="'fas fa-user-plus'" [title]="'Contact'" [link]="'/dashboard/contacts'" [isOpen]="openSubmenu === 'contact'" (toggle)="toggleSubmenu('contact')" [isCollapsed]="isCollapsed">
+        <li class="text-accent-offwhite font-normal text-lg hover:text-primary-off-white">
+          <a href="/dashboard/contacts/lists" class="active:text-primary-off-white">Lists</a>
+        </li>
+      </app-sub-menu>
+    <app-sub-menu [icon]="'fas fa-bullhorn'" [title]="'Campaigns'" [link]="'/dashboard/campaigns'" [isOpen]="openSubmenu === 'campaigns'" (toggle)="toggleSubmenu('campaigns')" [isCollapsed]="isCollapsed">
+      <li class="text-accent-offwhite  font-normal text-lg hover:text-primary-off-white">
+        <a href="/dashboard/campaigns/emails">Emails</a>
+      </li>
+      <li class="text-accent-offwhite  font-normal text-lg hover:text-primary-off-white">
+        <a href="#">WhatsApp</a>
+      </li>
+      <li class="text-accent-offwhite  font-normal text-lg hover:text-primary-off-white">
+        <a href="#">SMS</a>
+      </li>
+    </app-sub-menu>
+      <li class="text-accent-offwhite  flex gap-3 items-center font-semibold text-sm hover:text-primary-off-white">
+        <i class="fas fa-file-alt text-xl text-accent-offwhite"></i>
+        <a class="text-lg font-normal transition-opacity" [class.hidden]="isCollapsed">Templates</a>
+      </li>
+      <li class="text-accent-offwhite flex gap-3 items-center font-semibold text-sm hover:text-primary-off-white">
+        <i class="fas fa-comments text-xl text-accent-offwhite"></i>
+        <a class="text-lg font-normal transition-opacity" [class.hidden]="isCollapsed">Conversations</a>
+      </li>
+      <li class="text-accent-offwhite flex gap-3 items-center font-semibold text-sm hover:text-primary-off-white">
+        <i class="fas fa-repeat text-xl text-accent-offwhite"></i>
+        <a class="text-lg font-normal transition-opacity" [class.hidden]="isCollapsed">Web scraping</a>
+      </li>
+      <li class="text-accent-offwhite  flex gap-3 items-center font-semibold text-sm hover:text-primary-off-white">
+        <i class="fas fa-chart-bar text-xl text-accent-offwhite"></i>
+        <a class="text-lg font-normal transition-opacity" [class.hidden]="isCollapsed">Reports</a>
+      </li>
+    </ul>
+  </div>
+  <button class="toggle-btn text-white text-2xl absolute bottom-8 left-4 " (click)="toggleSidebar()">
+    <i class="fas" [class.fa-angle-double-left]="!isCollapsed" [class.fa-angle-double-right]="isCollapsed"></i>
+  </button>
+</div>

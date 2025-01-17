@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { VerifyService } from './verify.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
@@ -11,12 +11,14 @@ import { of } from 'rxjs';
 @Component({
   selector: 'app-verify',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule,],
   templateUrl: './verify.component.html',
   styleUrls: ['./verify.component.scss']
 })
 export class VerifyComponent implements OnInit {
   verifyForm: FormGroup;
+  isPasswordVisible = false;
+  isVerified = false;
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +30,10 @@ export class VerifyComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       verificationCode: ['', Validators.required]
     });
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   ngOnInit() {
@@ -47,7 +53,7 @@ onSubmit() {
       tap(response => {
         console.log('Response:', response);
         alert('Account verified successfully');
-        this.router.navigate(['/auth/login']).then(r => console.log('Navigated:', r));
+        this.isVerified = true;
       }),
       catchError(error => {
         console.error('Error:', error);
@@ -56,5 +62,8 @@ onSubmit() {
       })
     ).subscribe();
   }
+}
+navigateToLogin() {
+  this.router.navigate(['/auth/login']);
 }
 }
