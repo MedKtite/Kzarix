@@ -1,6 +1,7 @@
 package ecom.kzarix.service;
 
 import ecom.kzarix.dto.*;
+import ecom.kzarix.model.Role;
 import ecom.kzarix.model.User;
 import ecom.kzarix.repositories.UserRepository;
 import jakarta.mail.MessagingException;
@@ -36,11 +37,38 @@ public class AuthenticationService {
 
     public User signup(RegisterUserDto input) {
         User user = new User(input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()));
+        user.setRole(input.getRole() != null ? input.getRole() : Role.USER); //USER Role BY DEFAULT
+        if (input.getRole() == Role.ADMIN) {
+            sendAdminApprovalEmail(input);
+            throw new RuntimeException("Admin account created. Please wait for approval.");
+        }
         user.setVerificationCode(generateVerificationCode());
         user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
         user.setEnabled(false);
         sendVerificationEmail(user);
         return userRepository.save(user);
+    }
+
+    // Send Admin Approval Email
+    public void sendAdminApprovalEmail(RegisterUserDto input) {
+        String subject = "Admin Account Approval";
+        String approvalLink = "http://localhost:8085/auth/approve-admin?email=" + input.getEmail();
+        String htmlMessage = "<html>"
+                + "<body style=\"font-family: Arial, sans-serif;\">"
+                + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
+                + "<h2 style=\"color: #333;\">Admin Sign-Up Request</h2>"
+                + "<p style=\"font-size: 16px;\">An admin sign-up request has been made for the email: " + input.getEmail() + "</p>"
+                + "<p style=\"font-size: 16px;\">Click the link below to approve the request:</p>"
+                + "<a href=\"" + approvalLink + "\">Approve Admin Sign-Up</a>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
+
+        try {
+            emailService.sendVerificationEmail(input.getEmail(), subject, htmlMessage);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     public User authenticate(LoginUserDto input) {

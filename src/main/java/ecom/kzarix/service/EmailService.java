@@ -1,5 +1,6 @@
 package ecom.kzarix.service;
 
+import ecom.kzarix.dto.RegisterUserDto;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,6 @@ public class EmailService {
 
         emailSender.send(message);
     }
+
+
 }

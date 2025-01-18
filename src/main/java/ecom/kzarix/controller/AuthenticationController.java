@@ -1,7 +1,9 @@
 package ecom.kzarix.controller;
 
 import ecom.kzarix.dto.*;
+import ecom.kzarix.model.Role;
 import ecom.kzarix.model.User;
+import ecom.kzarix.repositories.UserRepository;
 import ecom.kzarix.response.LoginResponse;
 import ecom.kzarix.service.AuthenticationService;
 import ecom.kzarix.service.JwtService;
@@ -13,22 +15,49 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
+    private final UserRepository userRepository;
 
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService, UserRepository userRepository) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
+    // Register for the users
     @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+        registerUserDto.setRole(Role.USER);
         User registeredUser = authenticationService.signup(registerUserDto);
         return ResponseEntity.ok(registeredUser);
+    }
+    // Register for the Admin
+    @PostMapping("/signup/admin")
+    public ResponseEntity<User> registerAdmin(@RequestBody RegisterUserDto registerUserDto) {
+        registerUserDto.setRole(Role.ADMIN);
+        User registeredUser = authenticationService.signup(registerUserDto);
+        return ResponseEntity.ok(registeredUser);
+    }
+
+    // Admin Approval
+    @GetMapping("/approve-admin")
+    public ResponseEntity<String> approveAdmin(@RequestParam String email) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setRole(Role.ADMIN);
+            user.setEnabled(true);
+            userRepository.save(user);
+            return ResponseEntity.ok("Admin sign-up request approved");
+        } else {
+            return ResponseEntity.badRequest().body("User not found");
+        }
     }
 
     @PostMapping("/login")
