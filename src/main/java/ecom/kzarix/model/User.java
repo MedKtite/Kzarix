@@ -15,6 +15,7 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
