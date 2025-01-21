@@ -22,7 +22,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Roboto Mono", "monospace"], 
+        sans: ["Roboto", "monospace"], 
         "poppins-regular": ["Poppins", "sans-serif"],
         "poppins-semi-bold": ["Poppins", "sans-serif"],
       },

@@ -8,6 +8,8 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
 import { VerifyComponent } from './auth/verify/verify.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminSignUpComponent } from './auth/admin-sign-up/admin-sign-up.component';
+import { OrdersComponent } from './dashboard/pages/orders/orders.component';
+import { OverviewComponent } from './dashboard/pages/overview/overview.component';
 
 
 export const routes: Routes = [
@@ -22,7 +24,10 @@ export const routes: Routes = [
       { path: 'forgot-password', component: ForgetPasswordComponent }
     ]
   },
-  {path: 'dashboard', component: DashboardComponent, 
+  {path: 'dashboard', component: DashboardComponent, children: [
+    {path:'/', component: OverviewComponent},
+    {path: 'orders', component: OrdersComponent},
+  ]
   }
 
 ];

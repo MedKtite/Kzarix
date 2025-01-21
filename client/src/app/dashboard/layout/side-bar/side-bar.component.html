@@ -2,15 +2,15 @@
 [class.collapsed]="isCollapsed"
 (mouseenter)="onMouseEnter()" 
 (mouseleave)="onMouseLeave()"
- class='sidebar px-4 h-[92.9vh] flex flex-col text-start items-center bg-white'>
+ class='sidebar px-4 h-[94.3vh] flex flex-col text-start items-center bg-white '>
   <div id="menu" class="flex items-center mt-12">
     <ul class="flex flex-col items-start gap-8">
-      <li class="text-dark-blue flex gap-3 items-center font-semibold  hover:text-primary-off-white active:text-primary-off-white">
-        <i class="fas fa-tachometer-alt text-[16spx] text-gray"></i>
-        <a class="text-[16px] font-medium transition-opacity" [class.hidden]="isCollapsed" href="/dashboard">Overview</a>
+      <li class="text-dark-blue flex gap-3 items-center  hover:text-primary-off-white active:text-primary-off-white">
+        <i class="fas fa-tachometer-alt text-[16spx] text-accent-blue"></i>
+        <a class="text-[16px] font-normal transition-opacity" [class.hidden]="isCollapsed" href="/dashboard">Overview</a>
       </li>
       <app-sub-menu [icon]="'fas fa-box'" [title]="'Products'" [link]="'/dashboard/products'" [isOpen]="openSubmenu === 'products'" (toggle)="toggleSubmenu('products')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray font-medium ">
+        <li class="flex flex-col gap-4 text-gray font-normal ">
           <a href="/dashboard/products/orders" class="hover:text-accent-blue active:text-primary-off-white">Orders</a>
           <a href="/dashboard/products/products" class="hover:text-accent-blue active:text-primary-off-white">Products</a>
           <a href="/dashboard/products/categories" class="hover:text-accent-blue active:text-primary-off-white">Categories</a>
@@ -18,34 +18,34 @@
         </li>
       </app-sub-menu>
       <app-sub-menu [icon]="'fas fa-shopping-cart'" [title]="'Orders'" [link]="'/dashboard/orders'" [isOpen]="openSubmenu === 'orders'" (toggle)="toggleSubmenu('orders')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray font-medium ">
+        <li class="flex flex-col gap-4 text-gray  font-normal">
           <a href="/dashboard/orders/all" class="hover:text-accent-blue active:text-primary-off-white">All Orders</a>
           <a href="/dashboard/orders/pending" class="hover:text-accent-blue active:text-primary-off-white">Pending Orders</a>
           <a href="/dashboard/orders/completed" class="hover:text-accent-blue active:text-primary-off-white">Completed Orders</a>
         </li>
       </app-sub-menu>
       <app-sub-menu [icon]="'fas fa-users'" [title]="'Customers'" [link]="'/dashboard/customers'" [isOpen]="openSubmenu === 'customers'" (toggle)="toggleSubmenu('customers')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray font-medium ">
+        <li class="flex flex-col gap-4 text-gray font-normal ">
           <a href="/dashboard/customers/all" class="hover:text-accent-blue active:text-primary-off-white">All Customers</a>
           <a href="/dashboard/customers/activity" class="hover:text-accent-blue active:text-primary-off-white">Customer Activity</a>
         </li>
       </app-sub-menu>
       <app-sub-menu [icon]="'fas fa-bullhorn'" [title]="'Campaigns'" [link]="'/dashboard/campaigns'" [isOpen]="openSubmenu === 'campaigns'" (toggle)="toggleSubmenu('campaigns')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray font-medium ">
+        <li class="flex flex-col gap-4 text-gray font-normal ">
           <a href="/dashboard/campaigns/emails" class="hover:text-accent-blue active:text-primary-off-white">Email Campaigns</a>
           <a href="/dashboard/campaigns/sms" class="hover:text-accent-blue active:text-primary-off-white">SMS Campaigns</a>
           <a href="/dashboard/campaigns/push" class="hover:text-accent-blue active:text-primary-off-white">Push Notifications</a>
         </li>
       </app-sub-menu>
       <app-sub-menu [icon]="'fas fa-chart-line'" [title]="'Reports'" [link]="'/dashboard/reports'" [isOpen]="openSubmenu === 'reports'" (toggle)="toggleSubmenu('reports')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray font-medium text-[16px] ">
+        <li class="flex flex-col gap-4 text-gray font-normal text-[16px] ">
           <a href="/dashboard/reports/sales" class="hover:text-accent-blue active:text-primary-off-white">Sales Reports</a>
           <a href="/dashboard/reports/customers" class="hover:text-accent-blue active:text-primary-off-white">Customer Reports</a>
           <a href="/dashboard/reports/products" class="hover:text-accent-blue active:text-primary-off-white">Product Reports</a>
         </li>
       </app-sub-menu>
       <app-sub-menu [icon]="'fas fa-cogs'" [title]="'Settings'" [link]="'/dashboard/settings'" [isOpen]="openSubmenu === 'settings'" (toggle)="toggleSubmenu('settings')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray font-medium text-[16px] ">
+        <li class="flex flex-col gap-4 text-gray font-normal text-[16px] ">
           <a href="/dashboard/settings/general" class="hover:text-accent-blue active:text-primary-off-white">General Settings</a>
           <a href="/dashboard/settings/payment" class="hover:text-accent-blue active:text-primary-off-white">Payment Settings</a>
           <a href="/dashboard/settings/shipping" class="hover:text-accent-blue active:text-primary-off-white">Shipping Settings</a>
@@ -54,7 +54,7 @@
       </app-sub-menu>
     </ul>
   </div>
-  <button class="toggle-btn text-white text-2xl absolute bottom-8 left-4 " (click)="toggleSidebar()">
+  <button class="toggle-btn text-gray text- xl absolute bottom-8 left-4 " (click)="toggleSidebar()">
     <i class="fas" [class.fa-angle-double-left]="!isCollapsed" [class.fa-angle-double-right]="isCollapsed"></i>
   </button>
 </div>
