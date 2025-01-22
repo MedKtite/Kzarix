@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SubMenuComponent } from '../../../shared/sub-menu/sub-menu.component';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [CommonModule, RouterModule, FontAwesomeModule, SubMenuComponent],
+  imports: [CommonModule,  RouterModule, FontAwesomeModule, SubMenuComponent],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss'
 })

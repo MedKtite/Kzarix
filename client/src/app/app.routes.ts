@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminSignUpComponent } from './auth/admin-sign-up/admin-sign-up.component';
 import { OrdersComponent } from './dashboard/pages/orders/orders.component';
 import { OverviewComponent } from './dashboard/pages/overview/overview.component';
+import { AddProductComponent } from './dashboard/pages/add-product/add-product.component';
 
 
 export const routes: Routes = [
@@ -25,8 +26,9 @@ export const routes: Routes = [
     ]
   },
   {path: 'dashboard', component: DashboardComponent, children: [
-    {path:'/', component: OverviewComponent},
+    {path: '', component: OverviewComponent},
     {path: 'orders', component: OrdersComponent},
+    {path: 'products', component: AddProductComponent},
   ]
   }
 

@@ -9,21 +9,20 @@
         <i class="fas fa-tachometer-alt text-[16spx] text-accent-blue"></i>
         <a class="text-[16px] font-normal transition-opacity" [class.hidden]="isCollapsed" href="/dashboard">Overview</a>
       </li>
+
+      <li class="text-dark-blue flex gap-3 items-center  hover:text-primary-off-white active:text-primary-off-white">
+        <i class="fas fa-shopping-cart text-[16spx] text-accent-blue"></i>
+        <a class="text-[16px] font-normal transition-opacity" [class.hidden]="isCollapsed" href="/dashboard/orders">Orders</a>
+      </li>
+
       <app-sub-menu [icon]="'fas fa-box'" [title]="'Products'" [link]="'/dashboard/products'" [isOpen]="openSubmenu === 'products'" (toggle)="toggleSubmenu('products')" [isCollapsed]="isCollapsed">
         <li class="flex flex-col gap-4 text-gray font-normal ">
-          <a href="/dashboard/products/orders" class="hover:text-accent-blue active:text-primary-off-white">Orders</a>
-          <a href="/dashboard/products/products" class="hover:text-accent-blue active:text-primary-off-white">Products</a>
+          <a href="/dashboard/products" class="hover:text-accent-blue active:text-primary-off-white">Add Product</a>
           <a href="/dashboard/products/categories" class="hover:text-accent-blue active:text-primary-off-white">Categories</a>
           <a href="/dashboard/products/inventory" class="hover:text-accent-blue active:text-primary-off-white">Inventory</a>
         </li>
       </app-sub-menu>
-      <app-sub-menu [icon]="'fas fa-shopping-cart'" [title]="'Orders'" [link]="'/dashboard/orders'" [isOpen]="openSubmenu === 'orders'" (toggle)="toggleSubmenu('orders')" [isCollapsed]="isCollapsed">
-        <li class="flex flex-col gap-4 text-gray  font-normal">
-          <a href="/dashboard/orders/all" class="hover:text-accent-blue active:text-primary-off-white">All Orders</a>
-          <a href="/dashboard/orders/pending" class="hover:text-accent-blue active:text-primary-off-white">Pending Orders</a>
-          <a href="/dashboard/orders/completed" class="hover:text-accent-blue active:text-primary-off-white">Completed Orders</a>
-        </li>
-      </app-sub-menu>
+
       <app-sub-menu [icon]="'fas fa-users'" [title]="'Customers'" [link]="'/dashboard/customers'" [isOpen]="openSubmenu === 'customers'" (toggle)="toggleSubmenu('customers')" [isCollapsed]="isCollapsed">
         <li class="flex flex-col gap-4 text-gray font-normal ">
           <a href="/dashboard/customers/all" class="hover:text-accent-blue active:text-primary-off-white">All Customers</a>
