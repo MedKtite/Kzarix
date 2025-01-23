@@ -31,6 +31,14 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
+    // Order Status
+    public Order updateOrderStatus(Long id, String status) {
+        Order order = getOrderById(id);
+        order.setStatus(status);
+        return orderRepository.save(order);
+    }
+
+
 
 
 

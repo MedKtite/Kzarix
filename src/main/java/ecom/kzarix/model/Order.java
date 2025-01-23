@@ -19,5 +19,6 @@ public class Order {
     @OneToMany
     private List<Product> products;
     private double total;
+    private String status;
 
 }

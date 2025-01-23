@@ -1,38 +1,22 @@
 <div class="mx-auto p-4">
-    <h1 class="text-xl font-bold mb-4">Add New Product</h1>
-    <form class="grid grid-cols-1">
-      <div class="flex flex-col p-10 rounded-md gap-4 bg-white">
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-          <input type="text" placeholder="Enter Product Name" id="name" name="name" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
-        </div>
-        <div>
-            <label for="short-description" class="block text-sm font-medium text-gray-700">
-                Short Description * 
-            </label>
-            <textarea 
-                placeholder="Enter Short Description" 
-                id="short-description" 
-                name="short-description" 
-                class="text-start border-[1px] p-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-24 shadow-sm sm:text-sm border-gray-300 rounded-md">
-        </div>
-        <div>
-          <label for="short-description" class="block text-sm font-medium text-gray-700"
-          appTextFormatting 
-          [fontWeight]="'bold'" 
-          [fontStyle]="'italic'" 
-          [textDecoration]="'underline'" 
-          [fontSize]="14" >
-            Description * 
-          </label>
-          <textarea 
-
-            placeholder="Enter Short Description" 
-            id="short-description" 
-            name="short-description" 
-            class="text-start border-[1px] p-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-24 shadow-sm sm:text-sm border-gray-300 rounded-md">
-          </textarea>
-        </div>
+  <h1 class="text-xl font-bold mb-4">Add New Product</h1>
+  <form (ngSubmit)="onSubmit()" class="grid grid-cols-1">
+    <div class="flex flex-col p-10 rounded-md gap-4 bg-white">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" formControlName="name" placeholder="Enter Product Name" id="name" name="name" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
       </div>
-    </form>
-  </div>
+      <div>
+        <label for="short-description" class="block text-sm font-medium text-gray-700">Short Description *</label>
+        <textarea formControlName="shortDescription" placeholder="Enter Short Description" id="short-description" name="short-description" class="text-start border-[1px] p-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-24 shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+      </div>
+      <div>
+        <label for="long-description" class="block text-sm font-medium text-gray-700">Long Description</label>
+        <!-- <angular-editor formControlName="longDescription" [config]="editorConfig"></angular-editor> -->
+      </div>
+      <div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Product</button>
+      </div>
+    </div>
+  </form>
+</div>
