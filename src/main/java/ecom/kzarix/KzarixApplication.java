@@ -17,7 +17,7 @@ public class KzarixApplication {
     }
 
 
-    @Bean
+  /* @Bean
     CommandLineRunner initDatabase(ProductRepository productRepository) {
         return args -> {
             productRepository.save(Product.builder()
@@ -29,6 +29,6 @@ public class KzarixApplication {
                     .build());
 
         };
-    }
+    }/*/
 
 }

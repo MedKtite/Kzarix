@@ -17,7 +17,7 @@
 
       <app-sub-menu [icon]="'fas fa-box'" [title]="'Products'" [link]="'/dashboard/products'" [isOpen]="openSubmenu === 'products'" (toggle)="toggleSubmenu('products')" [isCollapsed]="isCollapsed">
         <li class="flex flex-col gap-4 text-gray font-normal ">
-          <a href="/dashboard/products" class="hover:text-accent-blue active:text-primary-off-white">Add Product</a>
+          <a href="/dashboard/products/add" class="hover:text-accent-blue active:text-primary-off-white">Add Product</a>
           <a href="/dashboard/products/categories" class="hover:text-accent-blue active:text-primary-off-white">Categories</a>
           <a href="/dashboard/products/inventory" class="hover:text-accent-blue active:text-primary-off-white">Inventory</a>
         </li>

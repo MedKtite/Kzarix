@@ -10,10 +10,12 @@ import java.util.List;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
+        this.categoryService = categoryService;
     }
 
     // List all products
@@ -28,6 +30,7 @@ public class ProductService {
 
     // Add a product
     public Product addProduct(Product product) {
+        product.setCategory(categoryService.addCategory(product.getCategory()));
         return productRepository.save(product);
     }
 

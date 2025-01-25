@@ -5,6 +5,7 @@ import ecom.kzarix.model.Role;
 import ecom.kzarix.model.User;
 import ecom.kzarix.repositories.UserRepository;
 import jakarta.mail.MessagingException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,19 +36,21 @@ public class AuthenticationService {
     }
 
 
-    public User signup(RegisterUserDto input) {
-        User user = new User(input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()));
-        user.setRole(input.getRole() != null ? input.getRole() : Role.USER); //USER Role BY DEFAULT
-        if (input.getRole() == Role.ADMIN) {
-            sendAdminApprovalEmail(input);
-            throw new RuntimeException("Admin account created. Please wait for approval.");
-        }
-        user.setVerificationCode(generateVerificationCode());
-        user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
-        user.setEnabled(false);
-        sendVerificationEmail(user);
-        return userRepository.save(user);
+public User signup(RegisterUserDto input) {
+    User user = new User(input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()));
+    user.setRole(input.getRole() != null ? input.getRole() : Role.USER); // USER Role BY DEFAULT
+    user.setVerificationCode(generateVerificationCode());
+    user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
+    user.setEnabled(false);
+    sendVerificationEmail(user);
+    userRepository.save(user);
+
+    if (input.getRole() == Role.ADMIN) {
+        sendAdminApprovalEmail(input);
+        throw new RuntimeException("Admin account created. Please wait for approval.");
     }
+    return user;
+}
 
     // Send Admin Approval Email
     public void sendAdminApprovalEmail(RegisterUserDto input) {
@@ -65,12 +68,47 @@ public class AuthenticationService {
                 + "</html>";
 
         try {
-            emailService.sendVerificationEmail(input.getEmail(), subject, htmlMessage);
+            emailService.sendVerificationEmail("ktite.m3@gmail.com", subject, htmlMessage);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
+
+
+    // Send Approved Email
+public ResponseEntity<String> approveAdmin(String email) {
+    Optional<User> optionalUser = userRepository.findByEmail(email);
+    if (optionalUser.isPresent()) {
+        User user = optionalUser.get();
+        user.setRole(Role.ADMIN);
+        user.setEnabled(true);
+        userRepository.save(user);
+
+        // Send success email to the admin
+        String subject = "Admin Account Approved";
+        String htmlMessage = "<html>"
+                + "<body style=\"font-family: Arial, sans-serif;\">"
+                + "<div style=\"background-color: #f5f5f5; padding: 20px;\">"
+                + "<h2 style=\"color: #333;\">Admin Account Approved</h2>"
+                + "<p style=\"font-size: 16px;\">Your admin account has been approved successfully.</p>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
+
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), subject, htmlMessage);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok("Admin sign-up request approved");
+    } else {
+        return ResponseEntity.badRequest().body("User not found");
+    }
+}
+
+    // Authenticate User
     public User authenticate(LoginUserDto input) {
         User user = userRepository.findByEmail(input.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -87,6 +125,7 @@ public class AuthenticationService {
 
         return user;
     }
+
 
     public void verifyUser(VerifyUserDto input) {
         Optional<User> optionalUser = userRepository.findByEmail(input.getEmail());

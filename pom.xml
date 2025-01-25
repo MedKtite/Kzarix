@@ -30,10 +30,7 @@
         </dependency>
 
         <!-- Spring Security OAuth2 Client for OAuth2 authentication -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
+
 
         <!-- Servlet API for Java Servlets -->
         <dependency>

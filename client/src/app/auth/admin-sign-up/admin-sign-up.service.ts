@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AdminSignUpService {
-  private apiUrl = 'http://localhost:8085/auth/signup/admin';
+  private apiUrl = 'http://localhost:8085/auth/admin-signup';
 
   constructor(private http: HttpClient) {}
 

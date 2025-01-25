@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AdminSignUpService } from './admin-sign-up.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -40,7 +39,7 @@ export class AdminSignUpComponent {
         ...this.signUpForm.value,
         role: 'ADMIN'
       };
-      this.http.post('http://localhost:8085/auth/signup/admin', adminData).subscribe(
+      this.http.post('http://localhost:8085/auth/admin-signup', adminData).subscribe(
         response => {
           alert('Admin account created successfully. Please check your email for the verification code.');
           this.router.navigate(['/auth/verify']);

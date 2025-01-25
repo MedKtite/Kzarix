@@ -10,7 +10,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminSignUpComponent } from './auth/admin-sign-up/admin-sign-up.component';
 import { OrdersComponent } from './dashboard/pages/orders/orders.component';
 import { OverviewComponent } from './dashboard/pages/overview/overview.component';
-import { AddProductComponent } from './dashboard/pages/add-product/add-product.component';
+import { AddProductComponent } from './dashboard/pages/products/add-product/add-product.component';
+import { CategoryComponent } from './dashboard/pages/products/category/category.component';
+import { ProductsComponent } from './dashboard/pages/products/products.component';
 
 
 export const routes: Routes = [
@@ -28,7 +30,10 @@ export const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, children: [
     {path: '', component: OverviewComponent},
     {path: 'orders', component: OrdersComponent},
-    {path: 'products', component: AddProductComponent},
+    {path: 'products', component: ProductsComponent, children: [
+      {path: 'add', component: AddProductComponent},
+      {path: 'categories', component: CategoryComponent},
+  ]},
   ]
   }
 

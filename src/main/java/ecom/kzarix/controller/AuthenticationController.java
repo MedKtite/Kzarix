@@ -8,9 +8,7 @@ import ecom.kzarix.response.LoginResponse;
 import ecom.kzarix.service.AuthenticationService;
 import ecom.kzarix.service.JwtService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -38,13 +36,16 @@ public class AuthenticationController {
         return ResponseEntity.ok(registeredUser);
     }
     // Register for the Admin
-    @PostMapping("/signup/admin")
-    public ResponseEntity<User> registerAdmin(@RequestBody RegisterUserDto registerUserDto) {
+    @PostMapping("/admin-signup")
+    public ResponseEntity<String> registerAdmin(@RequestBody RegisterUserDto registerUserDto) {
         registerUserDto.setRole(Role.ADMIN);
-        User registeredUser = authenticationService.signup(registerUserDto);
-        return ResponseEntity.ok(registeredUser);
+        try {
+            authenticationService.signup(registerUserDto);
+            return ResponseEntity.ok("Admin account created. Please wait for approval.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
     // Admin Approval
     @GetMapping("/approve-admin")
     public ResponseEntity<String> approveAdmin(@RequestParam String email) {
@@ -91,11 +92,11 @@ public ResponseEntity<Map<String, String>> verifyUser(@RequestBody VerifyUserDto
         }
     }
 
-    @GetMapping("/oauth2")
+    /*/@GetMapping("/oauth2")
     public String home(Model model, @AuthenticationPrincipal OAuth2User principal) {
         model.addAttribute("name", principal.getAttribute("name"));
         return "home";
-    }
+    }*/
 
 
     // Password Reset

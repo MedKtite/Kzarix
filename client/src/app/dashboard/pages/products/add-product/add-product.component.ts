@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-add-product',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, AngularEditorModule],
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })

@@ -27,7 +27,7 @@
         <div *ngIf="signUpForm.value.password !== signUpForm.value.confirmPassword && signUpForm.touched" class="text-red-500">
           Passwords do not match
         </div>
-        <button type="submit" class="bg-accent-blue p-4 w-48 text-white font-sans font-medium mt-8" [disabled]="signUpForm.invalid">Create Admin Account</button>
+        <button type="submit" class="bg-accent-blue p-4  text-white font-sans font-medium mt-8" [disabled]="signUpForm.invalid">Create Admin Account</button>
       </form>
     </div>
     <div class="h-screen text-center bg-black w-1/2 flex justify-center items-center">
