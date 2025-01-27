@@ -33,9 +33,9 @@
       </div>
     </div>
 
-    <a href="/login" class="flex gap-4 items-center px-4 py-4 hover:text-secondary-purple">
+    <button (click)="logout()" class="flex gap-4 items-center px-4 py-4 hover:text-secondary-purple">
       <fa-icon [icon]="['fas', 'sign-out-alt']" class="text-gray text-2xl"></fa-icon>
       <h3 class="text-sm text-gray font-sans font-semibold">Logout</h3>
-    </a>
+    </button>
   </div>
 </div>

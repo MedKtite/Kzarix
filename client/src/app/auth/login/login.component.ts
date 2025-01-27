@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -20,7 +21,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    library: FaIconLibrary
+    library: FaIconLibrary,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -36,8 +38,15 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.http.post('http://localhost:8085/auth/login', this.loginForm.value).subscribe(
-        response => {
+        (response: any) => {
+          localStorage.setItem('authToken', response.token);
           alert('Login successful');
+          const email = this.loginForm.get('email')?.value;
+          if (email === 'ktite.m3@gmail.com') {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/']);
+          }
         },
         error => {
           alert('Login failed');

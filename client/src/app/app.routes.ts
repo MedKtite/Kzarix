@@ -13,6 +13,7 @@ import { OverviewComponent } from './dashboard/pages/overview/overview.component
 import { AddProductComponent } from './dashboard/pages/products/add-product/add-product.component';
 import { CategoryComponent } from './dashboard/pages/products/category/category.component';
 import { ProductsComponent } from './dashboard/pages/products/products.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 export const routes: Routes = [
@@ -27,7 +28,7 @@ export const routes: Routes = [
       { path: 'forgot-password', component: ForgetPasswordComponent }
     ]
   },
-  {path: 'dashboard', component: DashboardComponent, children: [
+  {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard], children: [
     {path: '', component: OverviewComponent},
     {path: 'orders', component: OrdersComponent},
     {path: 'products', component: ProductsComponent, children: [

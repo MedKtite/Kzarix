@@ -20,8 +20,6 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private Role role;
     @Column(unique = true, nullable = false)
     private String username;
     @Column(unique = true, nullable = false)

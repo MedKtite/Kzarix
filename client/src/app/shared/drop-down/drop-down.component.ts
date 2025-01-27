@@ -3,6 +3,8 @@ import { Component, HostListener } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser, faCreditCard, faCog, faLocationArrow, faTools, faSignOutAlt, faChevronDown, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +17,12 @@ import { faUser, faCreditCard, faCog, faLocationArrow, faTools, faSignOutAlt, fa
 export class DropDownComponent {
   isDropDownVisible = false;
 
-  constructor(library: FaIconLibrary) {
+  constructor(
+    library: FaIconLibrary,
+    private authService: AuthService,
+    private router: Router
+  )
+   {
     library.addIcons(faUser, faCreditCard, faCog, faLocationArrow, faTools, faSignOutAlt, faChevronDown, faShieldAlt);
   }
 
@@ -30,5 +37,10 @@ export class DropDownComponent {
   toggleDropdown() {
     this.isDropDownVisible = !this.isDropDownVisible;
   }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  } 
 
 }

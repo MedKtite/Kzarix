@@ -1,16 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sign-up',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, RouterModule, ],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './admin-sign-up.component.html',
-  styleUrl: './admin-sign-up.component.scss'
+  styleUrls: ['./admin-sign-up.component.scss']
 })
 export class AdminSignUpComponent {
   signUpForm: FormGroup;
@@ -40,17 +41,20 @@ export class AdminSignUpComponent {
         role: 'ADMIN'
       };
       this.http.post('http://localhost:8085/auth/admin-signup', adminData).subscribe(
-        response => {
-          alert('Admin account created successfully. Please check your email for the verification code.');
-          this.router.navigate(['/auth/verify']);
+        (response: any) => {
+          if (response.message === "Admin account created. Please wait for approval.") {
+            alert(response.message);
+            this.router.navigate(['/auth/verify']);
+          } else {
+            alert('Failed to create admin account: ' + response.message);
+          }
         },
-        error => {
-          alert('Failed to create admin account');
+        (error: any) => {
+          alert('Failed to create admin account: ' + (error.error?.error || 'Unknown error'));
         }
       );
     } else {
       alert('Passwords do not match');
     }
   }
-
 }
