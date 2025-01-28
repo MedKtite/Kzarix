@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
+import { CommonModule } from '@angular/common';
+import { CategoryService } from '../category/category.service';
+import { AddProductService } from './add-product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -10,8 +13,10 @@ import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit {
   productForm: FormGroup;
+  categories: any[] = [];
+  selectedImage: File | null = null;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -46,18 +51,73 @@ export class AddProductComponent {
     toolbarPosition: 'top',
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private categoryService: CategoryService,
+    private addProductService: AddProductService
+  ) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
-      shortDescription: ['', Validators.required],
-      longDescription: ['']
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      quantity: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      image: [null]
     });
   }
 
-  onSubmit() {
-    if (this.productForm.valid) {
-      console.log(this.productForm.value);
-      // Handle form submission
+  ngOnInit() {
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.categoryService.getCategories().subscribe((data: any) => {
+      this.categories = data;
+    });
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.selectedImage = event.target.files[0];
+      console.log('Selected image:', this.selectedImage); // Debugging statement
     }
+  }
+
+  onSubmit() {
+    console.log('Form submitted'); // Debugging statement
+    if (this.productForm.valid) {
+      console.log('Form is valid'); // Debugging statement
+      const formData = new FormData();
+      formData.append('name', this.productForm.get('name')?.value);
+      formData.append('description', this.productForm.get('description')?.value);
+      formData.append('price', this.productForm.get('price')?.value);
+      formData.append('quantity', this.productForm.get('quantity')?.value);
+      formData.append('categoryId', this.productForm.get('categoryId')?.value);
+      if (this.selectedImage) {
+        formData.append('file', this.selectedImage);
+        console.log('Image appended to form data'); // Debugging statement
+      }
+
+      this.addProductService.addProduct(formData).subscribe(response => {
+        console.log('Product added successfully', response);
+        this.productForm.reset();
+        this.selectedImage = null;
+      }, error => {
+        console.error('Error adding product', error);
+      });
+    } else {
+      console.log('Form is invalid'); // Debugging statement
+      this.logFormErrors();
+    }
+  }
+
+  logFormErrors() {
+    Object.keys(this.productForm.controls).forEach(key => {
+      const controlErrors = this.productForm.get(key)?.errors;
+      if (controlErrors) {
+        console.log(`Key: ${key}, Errors:`, controlErrors);
+      }
+    });
   }
 }

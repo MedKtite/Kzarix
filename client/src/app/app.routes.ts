@@ -14,6 +14,7 @@ import { AddProductComponent } from './dashboard/pages/products/add-product/add-
 import { CategoryComponent } from './dashboard/pages/products/category/category.component';
 import { ProductsComponent } from './dashboard/pages/products/products.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ProductsListComponent } from './dashboard/pages/products/products-list/products-list.component';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
     {path: '', component: OverviewComponent},
     {path: 'orders', component: OrdersComponent},
     {path: 'products', component: ProductsComponent, children: [
+      {path: '', component: ProductsListComponent},
       {path: 'add', component: AddProductComponent},
       {path: 'categories', component: CategoryComponent},
   ]},

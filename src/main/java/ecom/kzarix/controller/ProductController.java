@@ -1,15 +1,14 @@
 package ecom.kzarix.controller;
 
-import ecom.kzarix.model.Image;
+
 import ecom.kzarix.model.Product;
+import ecom.kzarix.service.CategoryService;
 import ecom.kzarix.service.ImageService;
 import ecom.kzarix.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +17,13 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final ImageService imageService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductController(ProductService productService, ImageService imageService) {
+    public ProductController(ProductService productService, ImageService imageService, CategoryService categoryService) {
         this.productService = productService;
         this.imageService = imageService;
+        this.categoryService = categoryService;
     }
 
     // List all products
@@ -38,15 +39,14 @@ public class ProductController {
     }
 
     // Add a product
+
     @PostMapping("/add")
-    public ResponseEntity<Product> addProduct(@RequestParam String name, @RequestParam String description, @RequestParam double price, @RequestParam int quantity, @RequestParam Long categoryId, @RequestParam("file") MultipartFile file) {
-        try {
-            Image image = imageService.saveImage(file);
-            Product product = new Product(null, name, description, price, quantity, new Date(), image);
-            return ResponseEntity.ok(productService.addProduct(product));
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body(null);
-        }
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        product.setCategory(categoryService.getCategoryById(product.getCategory().getId()).orElseThrow(() -> new IllegalArgumentException("Invalid category ID")));
+        product.setCreatedAt(new Date());
+        Product savedProduct = productService.addProduct(product);
+        System.out.println("Saved Product in Controller: " + savedProduct); // Debugging statement
+        return ResponseEntity.ok(savedProduct);
     }
 
     // Update a product

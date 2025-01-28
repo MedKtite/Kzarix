@@ -14,7 +14,7 @@ import { NgModel } from '@angular/forms';
 })
 export class SideBarComponent {
 
-  isCollapsed = true;
+  isCollapsed = false;
   openSubmenu: string | null = null; 
 
 

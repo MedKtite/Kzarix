@@ -1,13 +1,16 @@
 package ecom.kzarix.service;
 
+import ecom.kzarix.model.Category;
 import ecom.kzarix.model.Product;
 import ecom.kzarix.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
@@ -28,10 +31,12 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-    // Add a product
+        // Add a product
     public Product addProduct(Product product) {
         product.setCategory(categoryService.addCategory(product.getCategory()));
-        return productRepository.save(product);
+        Product savedProduct = productRepository.save(product);
+        System.out.println("Saved Product: " + savedProduct); // Debugging statement
+        return savedProduct;
     }
 
     // Update a product
@@ -43,5 +48,4 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
-
 }

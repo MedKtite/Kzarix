@@ -1,14 +1,17 @@
 package ecom.kzarix.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "products")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -19,22 +22,7 @@ public class Product {
     private double price;
     private int quantity;
     @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    @ManyToOne
-    @JoinColumn(name = "image_id")
-    private Image image;
     private Date createdAt;
-
-    public Product() {
-    }
-
-    public Product(Long id, String name, String description, double price, int quantity, Date createdAt, Image image) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-        this.createdAt = createdAt;
-        this.image = image;
-    }
 }

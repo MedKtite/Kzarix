@@ -20,7 +20,7 @@ public class ImageService {
     }
 
     public Image saveImage(MultipartFile file) throws IOException {
-        Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes());
+        Image image = new Image(file.getBytes());
         return imageRepository.save(image);
     }
 

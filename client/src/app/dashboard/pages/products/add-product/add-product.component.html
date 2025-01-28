@@ -7,12 +7,26 @@
         <input type="text" formControlName="name" placeholder="Enter Product Name" id="name" name="name" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
       </div>
       <div>
-        <label for="short-description" class="block text-sm font-medium text-gray-700">Short Description</label>
-        <textarea formControlName="shortDescription" placeholder="Enter Short Description" id="short-description" name="short-description" class="text-start border-[1px] p-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-24 shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+        <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
       </div>
       <div>
-        <label for="long-description" class="block text-sm font-medium text-gray-700">Description</label>
-        <angular-editor formControlName="longDescription" [config]="editorConfig"></angular-editor>
+        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+        <input type="number" formControlName="price" placeholder="Enter Product Price" id="price" name="price" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
+      </div>
+      <div>
+        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+        <input type="number" formControlName="quantity" placeholder="Enter Product Quantity" id="quantity" name="quantity" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
+      </div>
+      <div>
+        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+        <select formControlName="categoryId" id="category" name="category" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+      <div>
+        <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+        <input type="file" (change)="onFileChange($event)" id="image" name="image" class="border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md">
       </div>
       <div>
         <button type="submit" class="bg-dark-blue text-white px-4 py-2 rounded">Add Product</button>
