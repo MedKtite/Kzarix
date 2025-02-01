@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
-import { CommonModule } from '@angular/common';
+import { AngularEditorComponent, AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { CategoryService } from '../category/category.service';
 import { AddProductService } from './add-product.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-product',
@@ -80,14 +80,11 @@ export class AddProductComponent implements OnInit {
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.selectedImage = event.target.files[0];
-      console.log('Selected image:', this.selectedImage); // Debugging statement
     }
   }
 
   onSubmit() {
-    console.log('Form submitted'); // Debugging statement
     if (this.productForm.valid) {
-      console.log('Form is valid'); // Debugging statement
       const formData = new FormData();
       formData.append('name', this.productForm.get('name')?.value);
       formData.append('description', this.productForm.get('description')?.value);
@@ -96,7 +93,6 @@ export class AddProductComponent implements OnInit {
       formData.append('categoryId', this.productForm.get('categoryId')?.value);
       if (this.selectedImage) {
         formData.append('file', this.selectedImage);
-        console.log('Image appended to form data'); // Debugging statement
       }
 
       this.addProductService.addProduct(formData).subscribe(response => {
@@ -107,7 +103,6 @@ export class AddProductComponent implements OnInit {
         console.error('Error adding product', error);
       });
     } else {
-      console.log('Form is invalid'); // Debugging statement
       this.logFormErrors();
     }
   }

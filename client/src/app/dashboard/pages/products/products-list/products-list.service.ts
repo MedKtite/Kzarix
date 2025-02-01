@@ -14,8 +14,8 @@ export class ProducstListService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  addProduct(product: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, product);
+  addProduct(product: any, category: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}?category=${category}`, product);
   }
 
   updateProduct(id: number, product: any): Observable<any> {

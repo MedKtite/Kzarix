@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,20 +28,24 @@ public class ProductService {
     }
 
     // Get a product by id
-    public Product getProductById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    public Optional<Product> getProductById(Long id) {
+        return productRepository.findById(id);
     }
 
-        // Add a product
+    // Add a product
     public Product addProduct(Product product) {
-        product.setCategory(categoryService.addCategory(product.getCategory()));
-        Product savedProduct = productRepository.save(product);
-        System.out.println("Saved Product: " + savedProduct); // Debugging statement
-        return savedProduct;
+        Category category = categoryService.getCategoryById(product.getCategory().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+        product.setCategory(category);
+        return productRepository.save(product);
     }
 
     // Update a product
-    public Product updateProduct(Product product) {
+    public Product updateProduct(Long id, Product product) {
+        if (!productRepository.existsById(id)) {
+            throw new IllegalArgumentException("Product not found");
+        }
+        product.setId(id);
         return productRepository.save(product);
     }
 

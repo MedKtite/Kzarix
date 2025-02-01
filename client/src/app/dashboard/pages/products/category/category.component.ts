@@ -39,7 +39,7 @@ export class CategoryComponent implements OnInit {
   onSubmit() {
     if (this.categoryForm.valid) {
       if (this.editMode) {
-        this.categoryService.updateCategory(this.currentCategoryId!, this.categoryForm.value).subscribe(updatedCategory => {
+        this.categoryService.updateCategory(this.currentCategoryId!.toString(), this.categoryForm.value).subscribe(updatedCategory => {
           this.loadCategories();
           this.categoryForm.reset();
           this.editMode = false;
@@ -64,7 +64,7 @@ export class CategoryComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    this.categoryService.deleteCategory(id).subscribe(() => {
+    this.categoryService.deleteCategory(id.toString()).subscribe(() => {
       this.loadCategories();
     });
   }
