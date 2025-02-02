@@ -15,6 +15,7 @@ import { CategoryComponent } from './dashboard/pages/products/category/category.
 import { ProductsComponent } from './dashboard/pages/products/products.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ProductsListComponent } from './dashboard/pages/products/products-list/products-list.component';
+import { ProductFormComponent } from './shared/product-form/product-form.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'products', component: ProductsComponent, children: [
       {path: '', component: ProductsListComponent},
       {path: 'add', component: AddProductComponent},
+      { path: 'edit/:id', component: ProductFormComponent }, // Fixed path
       {path: 'categories', component: CategoryComponent},
   ]},
   ]

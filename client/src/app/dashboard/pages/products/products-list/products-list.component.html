@@ -5,7 +5,12 @@
       <li *ngFor="let product of products" class="flex justify-between items-center p-2 border-b">
         <span>{{ product.name }}</span>
         <div class="flex gap-2">
-          <button (click)="onEdit(product)" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+          <button 
+            (click)="onEdit(product)" 
+            class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 transition-colors"
+          >
+            Edit
+          </button>          
           <button (click)="onDelete(product.id)" class="bg-dark-blue text-white px-2 py-1 rounded">Delete</button>
         </div>
       </li>

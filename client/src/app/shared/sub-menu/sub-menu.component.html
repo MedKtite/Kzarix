@@ -1,14 +1,17 @@
-<li class=" font-normal text-dark-blue flex gap-3 items-center cursor-pointer" 
+<li class="font-normal text-accent-offwhite flex gap-3 items-center cursor-pointer hover:text-accent-yellow"
+    [class.text-accent-yellow]="isActive"
     (click)="toggleSubmenu()">
-  <i [class]="icon" class="text-[16px] text-gray"></i>
-  <a class="text-[16px]  transition-opacity" 
-     [class.hidden]="isCollapsed"
-     [routerLink]="link">{{ title }}</a>
-  <i *ngIf="!isCollapsed" 
-     class="fas fa-angle-down text-[16px] text-gray transition-transform" 
-     [ngClass]="{'rotate-180': isOpen, 'rotate-0': !isOpen}"></i>
+    <i [class]="icon" class="text-[20px]"></i>
+    <a class="text-[16px] transition-opacity" 
+       [class.hidden]="isCollapsed"
+       [routerLink]="link"
+       routerLinkActive="text-accent-yellow">{{ title }}</a>
+    <i *ngIf="!isCollapsed" 
+       class="fas fa-angle-down text-[16px] transition-transform" 
+       [class]="marginLeft"
+       [ngClass]="{'rotate-180': isOpen, 'rotate-0': !isOpen}"></i>
 </li>
 <ul *ngIf="isOpen && !isCollapsed" 
     class="ml-6 mt-3 flex flex-col gap-4 transition-all">
-  <ng-content></ng-content>
+    <ng-content></ng-content>
 </ul>

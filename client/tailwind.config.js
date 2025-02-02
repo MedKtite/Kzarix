@@ -16,7 +16,7 @@ module.exports = {
         "secondary-purple": "#6A0DAD",
         accent: {
           green: "#00FF84", 
-          blue: "#007ACC", 
+          yellow: "#FFBE0B", 
           offwhite: "#E5E5E5",
           muted: "#B3B3B3", 
         },

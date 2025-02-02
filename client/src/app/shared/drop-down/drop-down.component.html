@@ -1,41 +1,41 @@
-<div class="relative z-40 -mt-[23px] mr-[4px] dropdown-container">
+<div class="relative z-40 -mt-[18px] mr-[4px] dropdown-container">
   <!-- Button to toggle the dropdown -->
   <button (click)="toggleDropdown()" class="flex items-center gap-2">
-    <fa-icon [icon]="['fas', 'chevron-down']" class="text-xl mt-3 text-gray transition-transform" [ngClass]="{'rotate-180': isDropDownVisible, 'rotate-0': !isDropDownVisible}"></fa-icon>
+    <fa-icon [icon]="['fas', 'chevron-down']" class="text-xl  text-accent-offwhite transition-transform" [ngClass]="{'rotate-180': isDropDownVisible, 'rotate-0': !isDropDownVisible}"></fa-icon>
   </button>
 
   <!-- Dropdown content -->
-  <div *ngIf="isDropDownVisible" class="absolute top-[50px] -right-[37px] w-[250px] flex flex-col border border-primary-lighter-gray bg-white">
+  <div *ngIf="isDropDownVisible" class="absolute top-[50px] -right-[37px] w-[250px] flex flex-col border border-primary-lighter-gray bg-primary-dark-slate">
     <div class="flex flex-col gap-4 border-b border-primary-lighter-gray px-4 py-4">
-      <h3 class="text-gray font-sans text-sm">medktite&#64;gmail.com</h3>
+      <h3 class="text-accent-offwhite font-sans text-sm">medktite&#64;gmail.com</h3>
       <div class="flex items-center gap-2">
-        <fa-icon [icon]="['fas', 'user']" class="text-gray"></fa-icon>
-        <h3 class="text-sm text-gray font-sans font-medium">My Profile</h3>
+        <fa-icon [icon]="['fas', 'user']" class="text-accent-offwhite"></fa-icon>
+        <h3 class="text-sm text-accent-offwhite font-sans font-medium">My Profile</h3>
       </div>
       <div class="flex items-center gap-2">
-        <fa-icon [icon]="['fas', 'shopping-cart']" class="text-gray text-xl"></fa-icon>
-        <h3 class="text-sm text-gray font-sans font-medium">My Orders</h3>
+        <fa-icon [icon]="['fas', 'shopping-cart']" class="text-accent-offwhite text-xl"></fa-icon>
+        <h3 class="text-sm text-accent-offwhite font-sans font-medium">My Orders</h3>
       </div>
       <div class="flex items-center gap-2">
-        <fa-icon [icon]="['fas', 'heart']" class="text-gray text-xl"></fa-icon>
-        <h3 class="text-sm text-gray font-sans font-medium">Wishlist</h3>
+        <fa-icon [icon]="['fas', 'heart']" class="text-accent-offwhite text-xl"></fa-icon>
+        <h3 class="text-sm text-accent-offwhite font-sans font-medium">Wishlist</h3>
       </div>
       <div class="flex items-center gap-2">
-        <fa-icon [icon]="['fas', 'shopping-bag']" class="text-gray text-xl"></fa-icon>
-        <h3 class="text-sm text-gray font-sans font-medium">Cart</h3>
+        <fa-icon [icon]="['fas', 'shopping-bag']" class="text-accent-offwhite text-xl"></fa-icon>
+        <h3 class="text-sm text-accent-offwhite font-sans font-medium">Cart</h3>
       </div>
     </div>
 
     <div class="flex flex-col gap-4 border-b border-primary-lighter-gray px-4 py-4">
       <div class="flex items-center gap-2">
-        <fa-icon [icon]="['fas', 'cog']" class="text-gray"></fa-icon>
-        <h3 class="text-sm text-gray font-sans font-medium">Settings</h3>
+        <fa-icon [icon]="['fas', 'cog']" class="text-accent-offwhite"></fa-icon>
+        <h3 class="text-sm text-accent-offwhite font-sans font-medium">Settings</h3>
       </div>
     </div>
 
     <button (click)="logout()" class="flex gap-4 items-center px-4 py-4 hover:text-secondary-purple">
-      <fa-icon [icon]="['fas', 'sign-out-alt']" class="text-gray text-2xl"></fa-icon>
-      <h3 class="text-sm text-gray font-sans font-semibold">Logout</h3>
+      <fa-icon [icon]="['fas', 'sign-out-alt']" class="text-accent-offwhite text-2xl"></fa-icon>
+      <h3 class="text-sm text-accent-offwhite font-sans font-semibold">Logout</h3>
     </button>
   </div>
 </div>

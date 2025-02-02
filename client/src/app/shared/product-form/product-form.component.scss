@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.angular-editor-toolbar {
+  border: 1px solid #ddd;
+  border-radius: 4px 4px 0 0;
+}
+
+.angular-editor-textarea {
+  border: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  min-height: 150px;
+}

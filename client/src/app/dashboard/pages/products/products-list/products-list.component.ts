@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ProducstListService } from './products-list.service';
+
 import { Router } from '@angular/router';
+import { ProductService } from '../products.service';
 
 @Component({
   selector: 'app-products-list',
@@ -12,25 +13,33 @@ import { Router } from '@angular/router';
 })
 export class ProductsListComponent implements OnInit {
   products: any[] = [];
+  error: string | null = null;
 
-  constructor(private productsListService: ProducstListService, private router: Router) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.loadProducts();
   }
 
   loadProducts() {
-    this.productsListService.getProducts().subscribe(data => {
-      this.products = data;
+    this.productService.getProducts().subscribe({
+      next: (data) => {
+        console.log('Received products:', data);
+        this.products = data;
+      },
+      error: (error) => {
+        console.error('Error loading products:', error);
+        this.error = error.message;
+      }
     });
   }
 
   onDelete(id: number) {
-    this.productsListService.deleteProduct(id).subscribe(() => {
+    this.productService.deleteProduct(id).subscribe(() => {
       this.loadProducts();
     });
   }
   onEdit(product: any) {
-    this.router.navigate(['dashboard/products', product.id]);
+    this.router.navigate(['/dashboard/products/edit', product.id]);
   }
 }

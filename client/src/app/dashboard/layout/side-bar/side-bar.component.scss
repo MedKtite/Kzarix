@@ -1,0 +1,17 @@
+.sidebar {
+  width: 200px;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &.collapsed {
+    width: 80px;
+  }
+}
+
+.toggle-btn {
+  transition: all 0.3s ease;
+  
+  .sidebar.collapsed & {
+    transform: rotate(180deg);
+  }
+}
