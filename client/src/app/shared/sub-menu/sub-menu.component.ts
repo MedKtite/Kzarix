@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
+import { SubmenuService } from './sub-menu.service';
 
 @Component({
   selector: 'app-sub-menu',
@@ -10,19 +11,29 @@ import { filter } from 'rxjs';
   templateUrl: './sub-menu.component.html',
   styleUrl: './sub-menu.component.scss'
 })
-export class SubMenuComponent implements OnInit {
+export class SubMenuComponent implements OnInit, OnDestroy {
+  @Input() submenuId!: string;
   @Input() title!: string;
   @Input() link!: string;
   @Input() icon!: string;
-  @Input() isOpen = false;
   @Input() isCollapsed = false;
-  @Input() marginLeft: string = 'ml-4';
   @Input() routes: string[] = [];
+  @Input() isOpen: boolean = false;
   @Output() toggle = new EventEmitter<void>();
 
-  isActive = false;
 
-  constructor(private router: Router) {}
+
+  isActive = false;
+  private subscription: Subscription;
+
+  constructor(
+    private router: Router,
+    private submenuService: SubmenuService
+  ) {
+    this.subscription = this.submenuService.activeSubmenu$.subscribe(activeMenu => {
+      this.isOpen = this.submenuId === activeMenu;
+    });
+  }
 
   ngOnInit() {
     this.router.events.pipe(
@@ -32,17 +43,15 @@ export class SubMenuComponent implements OnInit {
     });
   }
 
+
   private checkActiveRoute(currentUrl: string): void {
     this.isActive = this.routes.some(route => currentUrl.includes(route));
     if (this.isActive) {
-      this.isOpen = true;
+      this.submenuService.setActiveSubmenu(this.submenuId);
     }
   }
 
-  toggleSubmenu() {
-    if (!this.isCollapsed) {
-      this.isOpen = !this.isOpen;
-      this.toggle.emit();
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -7,7 +7,6 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { VerifyComponent } from './auth/verify/verify.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AdminSignUpComponent } from './auth/admin-sign-up/admin-sign-up.component';
 import { OrdersComponent } from './dashboard/pages/orders/orders.component';
 import { OverviewComponent } from './dashboard/pages/overview/overview.component';
 import { AddProductComponent } from './dashboard/pages/products/add-product/add-product.component';
@@ -25,18 +24,18 @@ export const routes: Routes = [
   { path: 'auth', children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignUpComponent },
-      {path:'admin-signup', component: AdminSignUpComponent},
       { path: 'verify', component: VerifyComponent },
       { path: 'forgot-password', component: ForgetPasswordComponent }
     ]
   },
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard], children: [
-    {path: '', component: OverviewComponent},
+    { path: '', redirectTo: 'overview', pathMatch: 'full' },
+    {path: 'overview', component: OverviewComponent},
     {path: 'orders', component: OrdersComponent},
     {path: 'products', component: ProductsComponent, children: [
       {path: '', component: ProductsListComponent},
       {path: 'add', component: AddProductComponent},
-      { path: 'edit/:id', component: ProductFormComponent }, // Fixed path
+      { path: 'edit/:id', component: ProductFormComponent },
       {path: 'categories', component: CategoryComponent},
   ]},
   ]
