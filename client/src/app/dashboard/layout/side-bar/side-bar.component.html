@@ -3,22 +3,32 @@
   <div id="menu" class="flex items-center mt-12 w-full">
     <ul class="flex flex-col items-start gap-8 w-full">
       <!-- Overview -->
-      <li class="w-full">
+      <li class="w-full flex gap-3 items-center">
+        <i class="fas fa-tachometer-alt text-[20px] text-accent-offwhite  hover:text-accent-yellow" [routerLink]="['/dashboard/overview']" ></i>
         <a [routerLink]="['/dashboard/overview']" 
            routerLinkActive="text-accent-yellow"
-           class=" text-accent-offwhite flex gap-3 items-center hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
+           class="text-accent-offwhite hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
            [class.hidden]="isCollapsed">
-           <i class="fas fa-tachometer-alt text-[20px]"></i>
-           Overview</a>
+           Overview
+        </a>
       </li>
       <!-- Orders -->
-      <li class="w-full">
+      <li class="w-full flex gap-3 items-center">
+         <i class="fas fa-shopping-cart text-[20px] text-accent-offwhite  hover:text-accent-yellow " [routerLink]="['/dashboard/orders']" ></i>
         <a [routerLink]="['/dashboard/orders']" 
            routerLinkActive="text-accent-yellow"
            class=" text-accent-offwhite flex gap-3 items-center hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
            [class.hidden]="isCollapsed">
-           <i class="fas fa-shopping-cart text-[20px] text-accent-blue"></i>
            Orders</a>
+      </li>
+      <!-- Inventory -->
+      <li class="w-full flex gap-3 items-center">
+          <i class="fas fa-warehouse text-[20px] text-accent-offwhite hover:text-accent-yellow" [routerLink]="['/dashboard/inventory']"></i>
+        <a [routerLink]="['/dashboard/inventory']" 
+           routerLinkActive="text-accent-yellow"
+           class=" text-accent-offwhite flex gap-3 items-center hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
+           [class.hidden]="isCollapsed">
+           Inventory</a>
       </li>
 
       <!-- Products Submenu -->

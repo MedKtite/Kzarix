@@ -49,7 +49,7 @@ export class ProductFormComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0)]],
       quantity: ['', [Validators.required, Validators.min(0)]],
       categoryId: ['', Validators.required],
-      image: [null]
+      image: ['', Validators.required]
     });
   }
 
@@ -66,16 +66,6 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  private initForm() {
-    this.productForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
-      quantity: ['', [Validators.required, Validators.min(0)]],
-      categoryId: ['', Validators.required],
-      image: [null]
-    });
-  }
 
   private loadCategories() {
     this.categoryService.getCategories().subscribe({
@@ -104,24 +94,24 @@ export class ProductFormComponent implements OnInit {
       this.selectedImage = event.target.files[0];
     }
   }
-
+  
   onSubmit() {
     if (this.productForm.valid) {
       const formData = new FormData();
       Object.keys(this.productForm.value).forEach(key => {
-        if (key !== 'image') {
+        if (key !== 'images') {
           formData.append(key, this.productForm.get(key)?.value);
         }
       });
-
+  
       if (this.selectedImage) {
-        formData.append('file', this.selectedImage);
+        formData.append('image', this.selectedImage);
       }
-
+  
       const operation = this.mode === 'edit' && this.productId
         ? this.productService.updateProduct(this.productId, formData)
         : this.productService.addProduct(formData);
-
+  
       operation.subscribe({
         next: () => {
           this.router.navigate(['/dashboard/products']);

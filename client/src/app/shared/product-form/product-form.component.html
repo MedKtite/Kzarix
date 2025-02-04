@@ -79,14 +79,17 @@
         </div>
       </div>
 
+
       <!-- Image Upload Field -->
       <div>
-        <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+        <label for="images" class="block text-sm font-medium text-gray-700">Images</label>
         <input 
           type="file" 
+          formControlName="images" 
           (change)="onFileChange($event)" 
-          id="image" 
+          id="images" 
           accept="image/*"
+          multiple
           class="text-center py-3 border-[1px] px-4 border-accent-offwhite mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 shadow-sm sm:text-sm border-gray-300 rounded-md"
         >
       </div>

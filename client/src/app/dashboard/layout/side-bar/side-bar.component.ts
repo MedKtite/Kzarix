@@ -37,6 +37,7 @@ export class SideBarComponent implements OnInit {
     if (this.isCollapsed) {
       this.submenuService.setActiveSubmenu(null);
     }
+
   }
 
   toggleProductsSubmenu(): void {

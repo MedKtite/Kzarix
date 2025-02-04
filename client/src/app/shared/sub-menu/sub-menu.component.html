@@ -3,11 +3,12 @@
     >
     <div class="flex gap-3 items-center">
         <i [class]="icon" class="text-[20px]"></i>
-        <a class="text-[16px] transition-opacity" 
-           [class.hidden]="isCollapsed">{{ title }}</a>
+        <a class="flex gap-3 items-center
+        text-[16px] transition-opacity" 
+           [class.hidden]="isCollapsed">{{ title }}
         <i *ngIf="!isCollapsed" 
-           class="fas fa-angle-down text-[16px] transition-transform duration-300" 
-           [ngClass]="{'rotate-180': isOpen}"></i>
+           class="fas fa-angle-down absolute right-6 text-[16px] transition-transform duration-300" 
+           [ngClass]="{'rotate-180': isOpen}"></i></a>
     </div>
 </li>
 <ul *ngIf="isOpen && !isCollapsed" 

@@ -12,9 +12,19 @@ import { NgApexchartsModule
 })
 export class OverviewComponent implements OnInit {
   public ordersChartOptions: any;
-  public usersChartOptions: any;
   public productsChartOptions: any;
   public salesChartOptions: any;
+  revenueChartOptions: any;
+  customersChartOptions: any;
+  usersChartOptions: any
+
+  totalRevenue: number = 0;
+  newCustomers: number = 0;
+  activeUsers: number = 0;
+  revenueRate: number = 0;
+  customersRate: number = 0;
+  usersRate: number = 0;
+
 
   ngOnInit() {
     this.initializeCharts();
@@ -89,5 +99,75 @@ export class OverviewComponent implements OnInit {
         categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
       }
     };
+
+    this.revenueChartOptions = {
+      series: [{
+        name: 'Revenue',
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+      }],
+      chart: {
+        type: 'line',
+        height: 100,
+        sparkline: {
+          enabled: true
+        }
+      },
+      colors: ['#16A34A'],
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'light',
+          type: 'horizontal',
+          shadeIntensity: 0.5,
+          gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+          inverseColors: true,
+          opacityFrom: 0.7,
+          opacityTo: 0.3,
+          stops: [0, 90, 100]
+        }
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+      }
+    };
+
+
+    this.customersChartOptions = {
+      series: [{
+        name: 'New Customers',
+        data: [5, 10, 15, 20, 14, 12, 11, 9]
+      }],
+      chart: {
+        height: 100,
+        sparkline: {
+          enabled: true
+        }
+      },
+      colors: ['#16A34A'], 
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'light',
+          type: 'horizontal',
+          shadeIntensity: 0.5,
+          gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+          inverseColors: true,
+          opacityFrom: 0.7,
+          opacityTo: 0.3,
+          stops: [0, 90, 100]
+        }}
+
+    };
+
+
+
+
+
+    this.totalRevenue = 5500; 
+    this.newCustomers = 120;
+    this.activeUsers = 300; 
+    this.revenueRate = 2.5; 
+    this.customersRate = 4.3; 
+    this.usersRate = 78.9; 
   }
 }

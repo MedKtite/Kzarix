@@ -30,7 +30,14 @@
                 "glob": "**/*",
                 "input": "node_modules/@kolkov/angular-editor/assets/icons",
                 "output": "assets/ae-icons/"
-              }
+              },
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "assets"
+              },
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
@@ -91,8 +98,10 @@
               {
                 "glob": "**/*",
                 "input": "public",
-                "output": "/"
-              }
+                "output": "assets"
+              },
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
