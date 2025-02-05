@@ -41,15 +41,12 @@
         [isOpen]="isSubmenuOpen('products')"
         (click)="toggleProductsSubmenu()">
         <li class="flex flex-col gap-4 text-accent-offwhite font-normal">
-          <a [routerLink]="['/dashboard/products/add']" 
+          <a href="/dashboard/products/add"
              routerLinkActive="text-accent-yellow"
              class="hover:text-accent-yellow">Add Product</a>
-          <a [routerLink]="['/dashboard/products/categories']" 
+          <a href="/dashboard/products/categories"
              routerLinkActive="text-accent-yellow"
              class="hover:text-accent-yellow">Categories</a>
-          <a [routerLink]="['/dashboard/products/inventory']" 
-             routerLinkActive="text-accent-yellow"
-             class="hover:text-accent-yellow">Inventory</a>
         </li>
       </app-sub-menu>
 
