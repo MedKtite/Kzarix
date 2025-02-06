@@ -5,21 +5,27 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SubMenuComponent } from '../../../shared/sub-menu/sub-menu.component';
 import { SubmenuService } from '../../../shared/sub-menu/sub-menu.service';
 import { filter } from 'rxjs';
+import { SidebarService } from './side-bar.service';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [CommonModule, RouterModule, FontAwesomeModule, SubMenuComponent],
+  imports: [CommonModule, RouterModule, FontAwesomeModule, ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent implements OnInit {
   isCollapsed = false;
   openSubmenu: string | null = null;
+  isProductsSubmenuOpen = false;
+  isMarketingSubmenuOpen = false;
+  isReportsSubmenuOpen = false;
+  isSettingsSubmenuOpen = false;
 
   constructor(
     private router: Router,
-    private submenuService: SubmenuService
+    private submenuService: SubmenuService,
+    private sidebarService: SidebarService
   ) {}
 
   ngOnInit() {
@@ -30,6 +36,9 @@ export class SideBarComponent implements OnInit {
         this.submenuService.setActiveSubmenu(null);
       }
     });
+    this.sidebarService.isCollapsed$.subscribe(isCollapsed => {
+      this.isCollapsed = isCollapsed;
+    });
   }
 
   toggleSidebar() {
@@ -39,21 +48,18 @@ export class SideBarComponent implements OnInit {
     }
 
   }
-
   toggleProductsSubmenu(): void {
-    this.openSubmenu = this.openSubmenu === 'products' ? null : 'products';
+    this.isProductsSubmenuOpen = !this.isProductsSubmenuOpen;
   }
 
   toggleMarketingSubmenu(): void {
-    this.openSubmenu = this.openSubmenu === 'marketing' ? null : 'marketing';
+    this.isMarketingSubmenuOpen = !this.isMarketingSubmenuOpen;
   }
-
-  toggleCustomersSubmenu(): void {
-    this.openSubmenu = this.openSubmenu === 'customers' ? null : 'customers';
+  toggleReportsSubmenu(): void {
+    this.isReportsSubmenuOpen = !this.isReportsSubmenuOpen;
   }
-  toggleSettingsSubmenu(): void {
-
-    this.openSubmenu = this.openSubmenu === 'settings' ? null : 'settings';
+  toggleSettingsSubmenu (): void {
+    this.isSettingsSubmenuOpen = !this.isSettingsSubmenuOpen;
   }
 
   isSubmenuOpen(menuId: string): boolean {

@@ -1,69 +1,91 @@
-<div class="flex flex-col p-4 gap-4 w-full h-screen">
-    <div>
-
+<div class="flex flex-col  gap-4 h-screen">
+    <div class="flex items-center rounded-t-md bg-white p-4 gap-14">
+        <div>
+            <img src="assets/pic-profile.jpeg" alt="portfolio" class="w-36 rounded-full relative border-2 border-dark-blue" id="profile-pic">
+            <input type="file" id="file-input" class="hidden" accept="image/*" onchange="updateProfilePic(event)">
+            <button class="relative -top-6 text-accent-offwhite text-xl ml-14" onclick="document.getElementById('file-input').click()">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+        <div id="cover" class="flex h-48 w-full rounded-md text-center items-center justify-center">
+            <input 
+                type="file" 
+                formControlName="images" 
+                (change)="onFileChange($event)" 
+                id="images" 
+                accept="image/*"
+                multiple
+                class="hidden"
+            >
+            <label for="images" class="flex flex-col gap-4 cursor-pointer text-center py-3">
+                <i class="fas fa-upload text-3xl text-white"></i>
+                <span class="text-white text-lg">Upload Images</span>
+            </label>
+        </div>
     </div>
-    <div id="details" class="flex flex-col  rounded-md bg-white">
+
+    <div id="details" class="flex flex-col -mt-3 bg-white p-4">
         <div class="flex flex-col gap-2 p-4">
-            <h1 class="text-2xl text-dark-blue font-medium">My Dettails</h1>
+            <h1 class="text-2xl text-dark-blue font-medium">My Details</h1>
             <p class="text-[16px] text-dark-blue/60 font-normal">Please fill full details about yourself</p>
         </div>
-        <hr class="w-full border-accent-offwhite border-t-4 ">
-        <div class="flex flex-col gap-2 p-4 ">
+        <div class="flex flex-col gap-2 p-4">
             <div class="flex flex-col gap-4">
                 <div class="flex gap-10">
-                    <div class="flex flex-col gap-2 w-1/2">
-                        <label class="text-[16px] font-medium text-dark-blue" for="">First Name</label>
-                        <input type="text" placeholder="Enter First Name" class="border border-accent-offwhite rounded-md p-2">
+                    <div class="flex flex-col gap-2 w-1/3">
+                        <label class="text-[16px] font-medium text-dark-blue" for="first-name">First Name</label>
+                        <input type="text" id="first-name" placeholder="Enter First Name" class="border border-accent-offwhite rounded-md p-2">
                     </div>
-                    <div class="flex flex-col gap-2 w-1/2">
-                        <label class="text-[16px] font-medium text-dark-blue" for="">Last Name</label>
-                        <input type="text" placeholder="Enter Last Enter" class="border border-accent-offwhite rounded-md p-2">
+                    <div class="flex flex-col gap-2 w-1/3">
+                        <label class="text-[16px] font-medium text-dark-blue" for="last-name">Last Name</label>
+                        <input type="text" id="last-name" placeholder="Enter Last Name" class="border border-accent-offwhite rounded-md p-2">
                     </div>
                 </div>
 
                 <div class="flex gap-10">
-                    <div class="flex flex-col gap-2 w-1/2">
-                        <label class="text-[16px] font-medium text-dark-blue" for="">Email </label>
-                        <input type="text" placeholder="Enter Email" class="border border-accent-offwhite rounded-md p-2">
+                    <div class="flex flex-col gap-2 w-1/3">
+                        <label class="text-[16px] font-medium text-dark-blue" for="email">Email</label>
+                        <input type="text" id="email" placeholder="Enter Email" class="border border-accent-offwhite rounded-md p-2">
                     </div>
-                    <div class="flex flex-col gap-2 w-1/2">
-                        <label class="text-[16px] font-medium text-dark-blue" for="">Phone Number</label>
-                        <input type="text" placeholder="Enter phone Number" class="border border-accent-offwhite rounded-md p-2">
+                    <div class="flex flex-col gap-2 w-1/3">
+                        <label class="text-[16px] font-medium text-dark-blue" for="phone-number">Phone Number</label>
+                        <input type="text" id="phone-number" placeholder="Enter Phone Number" class="border border-accent-offwhite rounded-md p-2">
                     </div>
                 </div>
             </div>
-            <!-- picture -->
-             <div class="flex flex-col gap-4 mt-4 p-4">
-                <h1 class="text-[16px] text-dark-blue font-medium">Your Photo</h1>
-                <div class="flex gap-14">
-                    <div>
-                        <img src="assets/pic-profile.jpeg" alt="portfolio" class="w-20 rounded-full relative border-2 border-dark-blue" id="profile-pic">
-                        <input type="file" id="file-input" class="hidden" accept="image/*" onchange="updateProfilePic(event)">
-                        <button class="relative -top-6 text-accent-offwhite text-xl ml-14 " onclick="document.getElementById('file-input').click()">
-                            <i class="fas fa-camera"></i>
-                        </button>
-                    </div>
-                    <div id="cover" class="flex h-48 w-full rounded-md text-center items-center justify-center">
-                        <input 
-                            type="file" 
-                            formControlName="images" 
-                            (change)="onFileChange($event)" 
-                            id="images" 
-                            accept="image/*"
-                            multiple
-                            class="hidden"
-                        >
-                        <label for="images" class="flex flex-col gap-4 cursor-pointer text-center py-3">
-                            <i class="fas fa-upload text-3xl text-white"></i>
-                            <span class="text-white text-lg">Upload Images</span>
-                        </label>
-                    </div>
-
-
-                </div>
-             </div>
-
         </div>
     </div>
+
+    <div class="flex flex-col bg-white -mt-3 p-4 gap-4">
+        <h1 class="text-2xl text-dark-blue font-medium">Change Password</h1>
+        <div class="flex flex-col gap-2 w-1/3">
+            <label class="text-[16px] font-medium text-dark-blue" for="current-password">Current Password</label>
+            <input type="password" id="current-password" placeholder="Enter Current Password" class="border border-accent-offwhite rounded-md p-2">
+        </div>
+        <div class="flex gap-10">
+            <div class="flex flex-col gap-2 w-1/3">
+                <label class="text-[16px] font-medium text-dark-blue" for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter New Password" class="border border-accent-offwhite rounded-md p-2">
+            </div>
+            <div class="flex flex-col gap-2 w-1/3">
+                <label class="text-[16px] font-medium text-dark-blue" for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm New Password" class="border border-accent-offwhite rounded-md p-2">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col bg-white -mt-3 p-4 rounded-b-md gap-4">
+        <h1 class="text-2xl text-dark-blue font-medium">Change Email</h1>
+        <div class="flex gap-10">
+            <div class="flex flex-col gap-2 w-1/3">
+                <label class="text-[16px] font-medium text-dark-blue" for="new-email">New Email</label>
+                <input type="email" id="new-email" placeholder="Enter New Email" class="border border-accent-offwhite rounded-md p-2">
+            </div>
+            <div class="flex flex-col gap-2 w-1/3">
+                <label class="text-[16px] font-medium text-dark-blue" for="new-email">Confirm Email</label>
+                <input type="email" id="new-email" placeholder="Enter New Email" class="border border-accent-offwhite rounded-md p-2">
+            </div>
+        </div>
+
+    </div>
 </div>
-<router-outlet></router-outlet>

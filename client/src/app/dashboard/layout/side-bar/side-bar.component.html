@@ -1,4 +1,4 @@
-<div class="sidebar px-4 h-full flex flex-col text-start items-center bg-dark-blue w border-r border-dark-blue"
+<div class="sidebar relative top-0 px-4 h-full flex flex-col text-start items-center bg-dark-blue w border-r border-dark-blue"
      [class.collapsed]="isCollapsed">
   <div id="menu" class="flex items-center mt-12 w-full">
     <ul class="flex flex-col items-start gap-8 w-full">
@@ -32,23 +32,24 @@
       </li>
 
       <!-- Products Submenu -->
-      <app-sub-menu 
-        [icon]="'fas fa-box'"
-        [title]="'Products'"
-        [link]="'/dashboard/products'"
-        [routes]="['/dashboard/products/add', '/dashboard/products/categories', '/dashboard/products/inventory']"
-        [isCollapsed]="isCollapsed"
-        [isOpen]="isSubmenuOpen('products')"
-        (click)="toggleProductsSubmenu()">
-        <li class="flex flex-col gap-4 text-accent-offwhite font-normal">
-          <a href="/dashboard/products/add"
-             routerLinkActive="text-accent-yellow"
-             class="hover:text-accent-yellow">Add Product</a>
-          <a href="/dashboard/products/categories"
-             routerLinkActive="text-accent-yellow"
-             class="hover:text-accent-yellow">Categories</a>
-        </li>
-      </app-sub-menu>
+       <li>
+         <a [routerLink]="['/dashboard/products']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleProductsSubmenu()">
+            <i class="fas fa-box text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+            <p [class.hidden]="isCollapsed">Products</p>
+            <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isProductsSubmenuOpen" [class.fa-chevron-up]="isProductsSubmenuOpen"></i>
+         </a>
+         <ul *ngIf="isProductsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
+            <li>
+               <a [routerLink]="['/dashboard/products/add']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Add Product</a>
+            </li>
+            <li>
+               <a [routerLink]="['/dashboard/products/categories']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Categories</a>
+            </li>
+            <li>
+               <a [routerLink]="['/dashboard/products/brands']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Brands</a>
+            </li>
+         </ul>
+       </li>
 
       <!-- Cutomers  -->
       <li class="w-full text-accent-offwhite flex gap-3 items-center hover:text-accent-yellow">
@@ -58,76 +59,67 @@
             class="text-[16px] font-normal transition-opacity" 
             [class.hidden]="isCollapsed">Customers</a>
       </li>
+      
 
       <!-- Marketing -->
-      <app-sub-menu 
-      [icon]="'fas fa-bullhorn'"
-      [title]="'Marketing'"
-      [link]="'/dashboard/marketing'"
-      [routes]="['/dashboard/marketing/promotions', '/dashboard/marketing/discounts', '/dashboard/marketing/coupons']"
-      [isCollapsed]="isCollapsed"
-      [isOpen]="isSubmenuOpen('marketing')"
-      (click)="toggleMarketingSubmenu()">
-      <li class="flex flex-col gap-4 text-accent-offwhite font-normal">
-        <a [routerLink]="['/dashboard/marketing/promotions']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow"> Promotions</a>
-        <a [routerLink]="['/dashboard/marketing/discounts']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Discounts</a>
-        <a [routerLink]="['/dashboard/marketing/coupons']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Coupons</a>
-        <a [routerLink]="['/dashboard/marketing/campaigns']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Campaigns</a>
-      </li>
-    </app-sub-menu>
+    <li>
+      <a [routerLink]="['/dashboard/marketing']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleMarketingSubmenu()">
+         <i class="fas fa-bullhorn text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+         <p [class.hidden]="isCollapsed">Marketing</p>
+         <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isMarketingSubmenuOpen" [class.fa-chevron-up]="isMarketingSubmenuOpen"></i>
+      </a>
+      <ul *ngIf="isMarketingSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
+         <li>
+            <a [routerLink]="['/dashboard/marketing/promotions']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Promotions</a>
+         </li>
+         <li>
+            <a [routerLink]="['/dashboard/marketing/discounts']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Discounts</a>
+         </li>
+         <li>
+            <a [routerLink]="['/dashboard/marketing/coupons']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Coupons</a>
+         </li>
+         <li>
+            <a [routerLink]="['/dashboard/marketing/campaigns']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Campaigns</a>
+         </li>
+      </ul>
+    </li>
 
       <!-- Reports & Analytics -->
-      <app-sub-menu 
-      [icon]="'fas fa-chart-line'"
-      [title]="'Analytics'"
-      [link]="'/dashboard/reports-analytics'"
-      [routes]="['/dashboard/reports-analytics/sales-reports', '/dashboard/reports-analytics/product-performance', '/dashboard/reports-analytics/revenue-analytics']"
-      [isCollapsed]="isCollapsed"
-      [isOpen]="isSubmenuOpen('customers')"
-      (click)="toggleCustomersSubmenu()">
-      <li class="flex flex-col gap-4 text-accent-offwhite font-normal">
-        <a [routerLink]="['/dashboard/reports-analytics/sales-reports']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow"> Sales reports</a>
-        <a [routerLink]="['/dashboard/reports-analytics/product-performance']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Product performance</a>
-        <a [routerLink]="['/dashboard/reports-analytics/revenue-analytics']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Revenue analytics</a>
-      </li>
-    </app-sub-menu>
+    <li>
+      <a [routerLink]="['/dashboard/reports-analytics']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleReportsSubmenu()">
+         <i class="fas fa-bullhorn text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+         <p [class.hidden]="isCollapsed">Report</p>
+         <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isReportsSubmenuOpen" [class.fa-chevron-up]="isReportsSubmenuOpen"></i>
+      </a>
+      <ul *ngIf="isReportsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
+         <li>
+            <a [routerLink]="['/dashboard/reports-analytics/sales-report']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow"> Sales reports</a>
+         </li>
+         <li>
+            <a [routerLink]="['/dashboard/reports-analytics/discounts']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Revenue analytics</a>
+         </li>
+      </ul>
+    </li>
     <!-- Settings  -->
-      <app-sub-menu
-      [icon]="'fas fa-cog'"
-      [title]="'Settings'"
-      [link]="'/dashboard/settings'"
-      [routes]="['/dashboard/settings/store-setting', '/dashboard/settings/payment-methods', '/dashboard/settings/shipping-options']"
-      [isCollapsed]="isCollapsed"
-      [isOpen]="isSubmenuOpen('settings')"
-      (click)="toggleSettingsSubmenu()">
-      <li class="flex flex-col gap-4 text-accent-offwhite font-normal">
-        <a [routerLink]="['/dashboard/settings/store-setting']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Store settings</a>
-        <a [routerLink]="['/dashboard/settings/payment-methods']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Payment methods</a>
-        <a [routerLink]="['/dashboard/settings/shipping-options']" 
-           routerLinkActive="text-accent-yellow"
-           class="hover:text-accent-yellow">Shipping options</a>
-      </li>
-    </app-sub-menu>
-
+    <li>
+      <a [routerLink]="['/dashboard/settings']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleSettingsSubmenu()">
+         <i class="fas fa-cog text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+         <p [class.hidden]="isCollapsed">settings</p>
+         <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isSettingsSubmenuOpen" [class.fa-chevron-up]="isSettingsSubmenuOpen"></i>
+      </a>
+      <ul *ngIf="isSettingsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
+         <li>
+            <a [routerLink]="['/dashboard/settings/sales-report']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow"> Store settings</a>
+         </li>
+         <li>
+            <a [routerLink]="['/dashboard/settings/shipping-options']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Shipping options</a>
+         </li>
+      </ul>
+    </li>
     </ul>
+
+
+
   </div>
 
   <button class="toggle-btn text-accent-offwhite text-xl absolute bottom-14 left-4" 
