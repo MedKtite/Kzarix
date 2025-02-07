@@ -1,10 +1,14 @@
-<div class="sidebar relative top-0 px-4 h-full flex flex-col text-start items-center bg-dark-blue w border-r border-dark-blue"
+<div class="sidebar  top-0 left-0 h-full flex flex-col text-start items-center bg-dark-blue w-64 border-r-2 border-x-dark-blue p-4"
      [class.collapsed]="isCollapsed">
-  <div id="menu" class="flex items-center mt-12 w-full">
+       <button class="toggle-btn text-accent-offwhite text-xl " 
+          (click)="toggleSidebar()">
+            <i class="fas fa-navicon text-3xl" ></i>
+         </button>
+  <div id="menu" class="flex items-center mt-14 w-full">
     <ul class="flex flex-col items-start gap-8 w-full">
       <!-- Overview -->
       <li class="w-full flex gap-3 items-center">
-        <i class="fas fa-tachometer-alt text-[20px] text-accent-offwhite  hover:text-accent-yellow" [routerLink]="['/dashboard/overview']" ></i>
+        <i class="fas fa-tachometer-alt text-[20px] text-accent-offwhite  hover:text-accent-yellow" [routerLink]="['/dashboard/overview']" (click)="toggleSidebar()"></i>
         <a [routerLink]="['/dashboard/overview']" 
            routerLinkActive="text-accent-yellow"
            class="text-accent-offwhite hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
@@ -14,7 +18,7 @@
       </li>
       <!-- Orders -->
       <li class="w-full flex gap-3 items-center">
-         <i class="fas fa-shopping-cart text-[20px] text-accent-offwhite  hover:text-accent-yellow " [routerLink]="['/dashboard/orders']" ></i>
+         <i class="fas fa-shopping-cart text-[20px] text-accent-offwhite  hover:text-accent-yellow " [routerLink]="['/dashboard/orders']" (click)="toggleSidebar()"></i>
         <a [routerLink]="['/dashboard/orders']" 
            routerLinkActive="text-accent-yellow"
            class=" text-accent-offwhite flex gap-3 items-center hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
@@ -23,7 +27,7 @@
       </li>
       <!-- Inventory -->
       <li class="w-full flex gap-3 items-center">
-          <i class="fas fa-warehouse text-[20px] text-accent-offwhite hover:text-accent-yellow" [routerLink]="['/dashboard/inventory']"></i>
+          <i class="fas fa-warehouse text-[20px] text-accent-offwhite hover:text-accent-yellow" [routerLink]="['/dashboard/inventory']" (click)="toggleSidebar()"></i>
         <a [routerLink]="['/dashboard/inventory']" 
            routerLinkActive="text-accent-yellow"
            class=" text-accent-offwhite flex gap-3 items-center hover:text-accent-yellow text-[16px] font-normal transition-opacity" 
@@ -34,9 +38,9 @@
       <!-- Products Submenu -->
        <li>
          <a [routerLink]="['/dashboard/products']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleProductsSubmenu()">
-            <i class="fas fa-box text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+            <i class="fas fa-box text-[28px] ml-[0.5px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" (click)="toggleSidebar()"></i>
             <p [class.hidden]="isCollapsed">Products</p>
-            <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isProductsSubmenuOpen" [class.fa-chevron-up]="isProductsSubmenuOpen"></i>
+            <i [class.hidden]="isCollapsed" class="fas relative -right-[22px]" [class.fa-chevron-down]="!isProductsSubmenuOpen" [class.fa-chevron-up]="isProductsSubmenuOpen"></i>
          </a>
          <ul *ngIf="isProductsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
             <li>
@@ -64,9 +68,9 @@
       <!-- Marketing -->
     <li>
       <a [routerLink]="['/dashboard/marketing']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleMarketingSubmenu()">
-         <i class="fas fa-bullhorn text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+         <i class="fas fa-bullhorn text-[25px] ml-[0.5px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" (click)="toggleSidebar()" ></i>
          <p [class.hidden]="isCollapsed">Marketing</p>
-         <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isMarketingSubmenuOpen" [class.fa-chevron-up]="isMarketingSubmenuOpen"></i>
+         <i [class.hidden]="isCollapsed" class="fas relative -right-[12px]" [class.fa-chevron-down]="!isMarketingSubmenuOpen" [class.fa-chevron-up]="isMarketingSubmenuOpen"></i>
       </a>
       <ul *ngIf="isMarketingSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
          <li>
@@ -87,9 +91,9 @@
       <!-- Reports & Analytics -->
     <li>
       <a [routerLink]="['/dashboard/reports-analytics']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleReportsSubmenu()">
-         <i class="fas fa-bullhorn text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
+          <i class="fas fa-chart-line text-[25px] ml-[0.5px] text-accent-offwhite" routerLinkActive="active text-accent-yellow"></i>
          <p [class.hidden]="isCollapsed">Report</p>
-         <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isReportsSubmenuOpen" [class.fa-chevron-up]="isReportsSubmenuOpen"></i>
+         <i [class.hidden]="isCollapsed" class="fas relative -right-[36.5px]" [class.fa-chevron-down]="!isReportsSubmenuOpen" [class.fa-chevron-up]="isReportsSubmenuOpen"></i>
       </a>
       <ul *ngIf="isReportsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
          <li>
@@ -103,9 +107,9 @@
     <!-- Settings  -->
     <li>
       <a [routerLink]="['/dashboard/settings']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleSettingsSubmenu()">
-         <i class="fas fa-cog text-[20px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" ></i>
-         <p [class.hidden]="isCollapsed">settings</p>
-         <i [class.hidden]="isCollapsed" class="fas" [class.fa-chevron-down]="!isSettingsSubmenuOpen" [class.fa-chevron-up]="isSettingsSubmenuOpen"></i>
+         <i class="fas fa-cog text-[28px] ml-[0.5px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" (click)="toggleSidebar()"></i>
+         <p [class.hidden]="isCollapsed">Settings</p>
+         <i [class.hidden]="isCollapsed" class="fas relative -right-6" [class.fa-chevron-down]="!isSettingsSubmenuOpen" [class.fa-chevron-up]="isSettingsSubmenuOpen"></i>
       </a>
       <ul *ngIf="isSettingsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
          <li>
@@ -122,10 +126,5 @@
 
   </div>
 
-  <button class="toggle-btn text-accent-offwhite text-xl absolute bottom-14 left-4" 
-          (click)="toggleSidebar()">
-    <i class="fas" 
-       [class.fa-angle-double-left]="!isCollapsed" 
-       [class.fa-angle-double-right]="isCollapsed"></i>
-  </button>
+
 </div>

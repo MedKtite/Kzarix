@@ -11,13 +11,5 @@ import { RouterModule } from '@angular/router';
 })
 export class SettingsComponent {
 
-  selectedImage: File | null = null;
 
-  constructor() { }
-
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      this.selectedImage = event.target.files[0];
-    }
-  }
 }

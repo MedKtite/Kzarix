@@ -4,14 +4,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser, faCreditCard, faCog, faLocationArrow, faTools, faSignOutAlt, faChevronDown, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../auth/auth.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 
 
 @Component({
   selector: 'app-drop-down',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, RouterModule],
   templateUrl: './drop-down.component.html',
   styleUrl: './drop-down.component.scss'
 })

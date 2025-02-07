@@ -10,11 +10,11 @@
       <h3 class="text-accent-offwhite font-sans text-sm">medktite&#64;gmail.com</h3>
       <div class="flex items-center gap-2">
         <fa-icon [icon]="['fas', 'user']" class="text-accent-offwhite"></fa-icon>
-        <h3 class="text-sm text-accent-offwhite font-sans font-medium">My Profile</h3>
+        <a [routerLink] ="['/dashboard/settings/profile']" class="cursor-pointer text-sm text-accent-offwhite font-sans font-medium">My Profile</a>
       </div>
       <div class="flex items-center gap-2">
         <fa-icon [icon]="['fas', 'shopping-cart']" class="text-accent-offwhite text-xl"></fa-icon>
-        <h3 class="text-sm text-accent-offwhite font-sans font-medium">My Orders</h3>
+        <a [routerLink]="['/dashboard/orders']" class="cursor-pointer text-sm text-accent-offwhite font-sans font-medium">My Orders</a>
       </div>
       <div class="flex items-center gap-2">
         <fa-icon [icon]="['fas', 'heart']" class="text-accent-offwhite text-xl"></fa-icon>

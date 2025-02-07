@@ -38,13 +38,22 @@ export class OverviewComponent implements OnInit {
       }],
       chart: {
         type: 'line',
-        height: 350
+        height: 350,
+        foreColor: '#ffffff',
       },
       title: {
-        text: 'Orders'
+        text: ' Orders',
+        style: {
+          color: '#ffffff' 
+        }
       },
       xaxis: {
-        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: {
+          style: {
+            colors: '#ffffff'
+          }
+        }
       }
     };
 
@@ -55,29 +64,38 @@ export class OverviewComponent implements OnInit {
       }],
       chart: {
         type: 'bar',
-        height: 350
+        height: 350,
+        foreColor: '#ffffff',
       },
       title: {
-        text: 'Users'
+        text: 'Users',
+        style: {
+          color: '#ffffff' 
+        }
       },
       xaxis: {
-        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: {
+          style: {
+            colors: '#ffffff'
+          }}
       }
     };
 
     this.productsChartOptions = {
-      series: [{
-        name: 'Views',
-        data: [300, 500, 100, 400, 200]
-      }],
+      series: [300, 500, 100, 400, 200],
       chart: {
-        type: 'pie',
-        height: 350
+      type: 'pie',
+      height: 350,
+      foreColor: '#ffffff',
       },
       title: {
-        text: 'Most Viewed Products'
+      text: 'Most Viewed Products', 
+      style: {
+        color: '#ffffff' 
+      }
       },
-      labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E']
+      labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'],
     };
 
     this.salesChartOptions = {
@@ -90,13 +108,21 @@ export class OverviewComponent implements OnInit {
       }],
       chart: {
         type: 'line',
-        height: 350
+        height: 350,
+        foreColor: '#ffffff',
       },
       title: {
-        text: 'Sales Report'
+        text: 'Sales Report',
+        style: {
+          color: '#ffffff' 
+        }
       },
       xaxis: {
-        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: {
+          style: {
+            colors: '#ffffff'
+          }}
       }
     };
 
@@ -112,7 +138,7 @@ export class OverviewComponent implements OnInit {
           enabled: true
         }
       },
-      colors: ['#16A34A'],
+      colors: ['#B3B3B3'],
       fill: {
         type: 'gradient',
         gradient: {
@@ -143,7 +169,7 @@ export class OverviewComponent implements OnInit {
           enabled: true
         }
       },
-      colors: ['#16A34A'], 
+      colors: ['#B3B3B3'], 
       fill: {
         type: 'gradient',
         gradient: {

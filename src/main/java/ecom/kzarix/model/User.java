@@ -27,6 +27,10 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_image_id", referencedColumnName = "id")
+    private Image profileImage;
+
     @Column(name = "verification_code")
     private String verificationCode;
 

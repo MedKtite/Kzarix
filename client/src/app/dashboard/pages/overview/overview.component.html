@@ -1,13 +1,29 @@
-<div class="flex flex-col gap-4 w-full">
-        <div class="flex gap-2 py-4">
-        
+<div class="flex flex-col gap-4 w-full p-2">
+        <div class="flex gap-4  justify-start">
+            <!-- Profile -->
+            <div class="flex  bg-primary-dark-slate p-4 rounded-md ml-auto w-1/3">
+                <div class="flex gap-2 items-center">
+                    <div>
+                        <img src="assets/pic-profile.jpeg" alt="portfolio" class="w-20 rounded-full relative border-2 border-dark-blue">
+                    </div>
+                    <span class="z-40 relative -top-[12px] -left-[18px]  w-4 h-4 bg-green-500 border-2 border-dark-blue rounded-full"></span>
+
+                    <div class="flex flex-col items-center -mt-2">
+                        <p class="text-accent-offwhite ">Mohammed KTITE</p>
+                        <div class="-mt-1">
+                            <span class="text-accent-offwhite text-[12px] font-light">Account Status – </span>
+                            <span class="text-[#00fd72] text-[10px] font-semibold">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Total Revenue -->
-            <div class="flex bg-white p-4 rounded-md">
-                <div class="flex gap-2 flex-col text-dark-blue mt-4">
+            <div class="flex bg-primary-dark-slate gap-14 p-4 rounded-md w-1/3">
+                <div class="flex gap-2 flex-col text-accent-offwhite mt-4">
                     <h3 class="text-[20px]">Total Revenue</h3>
                     <div class="flex gap-2 items-center">
                         <p class="text-3xl">{{ totalRevenue }}</p>
-                        <p class="text-[12px]  rounded-full p-1 -mt-4 text-green-600">
+                        <p class="text-[12px] rounded-full p-1 -mt-4 text-green-600">
                             <i class="fas fa-arrow-alt-circle-up"></i>
                             +{{ revenueRate }} %
                         </p>
@@ -22,14 +38,14 @@
                     class="w-3/12 mt-4">
                 </apx-chart>
             </div>
-
+        
             <!-- New Customers -->
-            <div class="flex gap-4 bg-white p-4 rounded-md">
-                <div class="flex gap-2 flex-col text-dark-blue mt-4">
+            <div class="flex gap-4 bg-primary-dark-slate p-4 rounded-md w-1/3">
+                <div class="flex gap-2 flex-col text-accent-offwhite mt-4">
                     <h3 class="text-[20px]">New Customers</h3>
                     <div class="flex gap-2 items-center">
                         <p class="text-3xl">{{ newCustomers }}</p>
-                        <p class="text-[12px]rounded-full p-1 -mt-4 text-green-600">
+                        <p class="text-[12px] rounded-full p-1 -mt-4 text-green-600">
                             <i class="fas fa-arrow-alt-circle-up"></i> +{{ customersRate }} %
                         </p>
                     </div>
@@ -43,72 +59,34 @@
                     class="w-3/12 mt-4">
                 </apx-chart>
             </div>
-        
-            <!-- Profile -->
-            <div class="flex gap-2 justify-end bg-white p-4 rounded-md ml-auto">
-                <div class="flex flex-col gap-2 text-dark-blue">
-                    <div>
-                        <span class="text-[15px] font-medium">Role: </span>
-                        <span class="text-[15px] font-light">Admin</span>
-                        <i class="fas fa-pencil-alt text-xs cursor-pointer ml-2"></i>
-                    </div>
-                    <div>
-                        <span class="text-[15px] font-medium">Email Address:</span>
-                        <span class="text-[15px] font-light"> ktite.m3&#64;gmail.com</span>
-                        <i class="fas fa-pencil-alt cursor-pointer ml-2 text-xs"></i>
-                    </div>
-                    <div>
-                        <span class="text-[15px] font-medium">Phone:</span>
-                        <span class="text-[15px] font-light"> +(212) 631 756 678</span>
-                        <i class="fas fa-pencil-alt cursor-pointer ml-2 text-xs"></i>
-                    </div>
-                    <div>
-                        <span class="text-[15px] font-medium">Password:</span>
-                        <span class="text-[15px] font-light"> ******</span>
-                        <i class="fas fa-pencil-alt cursor-pointer ml-2 text-xs"></i>
-                    </div>
-                
-                </div>
-                <div class="flex flex-col gap-2 items-center">
-                    <img src="assets/pic-profile.jpeg" alt="portfolio" class="w-20 rounded-full relative border-2 border-dark-blue">
-                    <span class="relative bottom-6 -right-6 w-4 h-4 bg-green-500 border-2 border-dark-blue rounded-full"></span>
-                    <div class="flex flex-col items-center -mt-2">
-                        <p class="text-dark-blue mb-1">Mohammed KTITE</p>
-                        <div class="-mt-1">
-                            <span class="text-dark-blue text-[10px] font-light">Account Status – </span>
-                            <span class="text-[#00fd72] text-[10px]  font-semibold">Active</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
         </div>
 
         <!-- Chats -->
-    <div class="flex gap-4 bg-accent-offwhite w-full">
+    <div class="flex gap-4 w-full">
         <!-- Orders -->
-        <div class="flex-1 bg-white p-6 rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Orders</h2>
-            <apx-chart [series]="ordersChartOptions.series" [chart]="ordersChartOptions.chart" [xaxis]="ordersChartOptions.xaxis"></apx-chart>
+        <div class="flex-1 bg-primary-dark-slate/80 p-6 rounded-md">
+            <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Orders</h2>
+            <apx-chart class="rounded-md " [series]="ordersChartOptions.series" [chart]="ordersChartOptions.chart" [xaxis]="ordersChartOptions.xaxis"></apx-chart>
         </div>
 
         <!-- Users -->
-        <div class="flex-1 bg-white p-6 rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Users</h2>
-            <apx-chart class="bg-white" [series]="usersChartOptions.series" [chart]="usersChartOptions.chart" [xaxis]="usersChartOptions.xaxis"></apx-chart>
+        <div class="flex-1 bg-primary-dark-slate p-6 rounded-md">
+            <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Users</h2>
+            <apx-chart class=" rounded-md" [series]="usersChartOptions.series" [chart]="usersChartOptions.chart" [xaxis]="usersChartOptions.xaxis"></apx-chart>
         </div>
     </div>
 
     <div class="flex gap-4">
+        <!-- Sales Report -->
+        <div class="chart-container flex-1   bg-primary-dark-slate p-6 rounded-md">
+            <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Sales Report</h2>
+            <apx-chart [series]="salesChartOptions.series" [chart]="salesChartOptions.chart"  [xaxis]="salesChartOptions.xaxis"></apx-chart>
+        </div>
         <!-- Most Viewed Products -->
-        <div class="chart-container flex-1  bg-white p-6 rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Most Viewed Products</h2>
+        <div class=" bg-primary-dark-slate flex-1 p-6 rounded-md">
+            <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Most Viewed Products</h2>
             <apx-chart [series]="productsChartOptions.series" [chart]="productsChartOptions.chart"  [labels]="productsChartOptions.labels"></apx-chart>
         </div>
 
-        <!-- Sales Report -->
-        <div class="chart-container flex-1   bg-white p-6 rounded-md">
-            <h2 class="text-2xl font-bold mb-4">Sales Report</h2>
-            <apx-chart [series]="salesChartOptions.series" [chart]="salesChartOptions.chart"  [xaxis]="salesChartOptions.xaxis"></apx-chart>
-        </div>
+
 </div>
