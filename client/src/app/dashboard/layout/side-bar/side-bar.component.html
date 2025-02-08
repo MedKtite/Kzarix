@@ -109,16 +109,7 @@
       <a [routerLink]="['/dashboard/settings']" routerLinkActive="active text-accent-yellow" class="flex gap-4 items-center text-[16px] text-accent-offwhite hover:text-accent-yellow" (click)="toggleSettingsSubmenu()">
          <i class="fas fa-cog text-[28px] ml-[0.5px] text-accent-offwhite" routerLinkActive="active text-accent-yellow" (click)="toggleSidebar()"></i>
          <p [class.hidden]="isCollapsed">Settings</p>
-         <i [class.hidden]="isCollapsed" class="fas relative -right-6" [class.fa-chevron-down]="!isSettingsSubmenuOpen" [class.fa-chevron-up]="isSettingsSubmenuOpen"></i>
       </a>
-      <ul *ngIf="isSettingsSubmenuOpen" class="flex flex-col gap-4 mt-4 ml-8" [class.hidden]="isCollapsed">
-         <li>
-            <a [routerLink]="['/dashboard/settings/sales-report']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow"> Store settings</a>
-         </li>
-         <li>
-            <a [routerLink]="['/dashboard/settings/shipping-options']" class="text-[16px] text-accent-offwhite hover:text-accent-yellow">Shipping options</a>
-         </li>
-      </ul>
     </li>
     </ul>
 

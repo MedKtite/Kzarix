@@ -16,7 +16,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ProductsListComponent } from './dashboard/pages/products/products-list/products-list.component';
 import { ProductFormComponent } from './shared/product-form/product-form.component';
 import { SettingsComponent } from './dashboard/pages/settings/settings.component';
-import { ProfileComponent } from './dashboard/pages/settings/profile/profile.component';
+import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -42,6 +42,7 @@ export const routes: Routes = [
   ]},
   {path: 'settings', component: SettingsComponent, children: [
     {path:'profile', component: ProfileComponent},
+    
   ]
   },
   ]

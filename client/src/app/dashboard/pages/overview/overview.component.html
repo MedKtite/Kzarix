@@ -70,7 +70,7 @@
         </div>
 
         <!-- Users -->
-        <div class="flex-1 bg-primary-dark-slate p-6 rounded-md">
+        <div class="flex-1 bg-primary-dark-slate/80 p-6 rounded-md">
             <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Users</h2>
             <apx-chart class=" rounded-md" [series]="usersChartOptions.series" [chart]="usersChartOptions.chart" [xaxis]="usersChartOptions.xaxis"></apx-chart>
         </div>
@@ -78,12 +78,12 @@
 
     <div class="flex gap-4">
         <!-- Sales Report -->
-        <div class="chart-container flex-1   bg-primary-dark-slate p-6 rounded-md">
+        <div class="chart-container flex-1   bg-primary-dark-slate/80 p-6 rounded-md">
             <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Sales Report</h2>
             <apx-chart [series]="salesChartOptions.series" [chart]="salesChartOptions.chart"  [xaxis]="salesChartOptions.xaxis"></apx-chart>
         </div>
         <!-- Most Viewed Products -->
-        <div class=" bg-primary-dark-slate flex-1 p-6 rounded-md">
+        <div class=" bg-primary-dark-slate/80 flex-1 p-6 rounded-md">
             <h2 class="text-2xl font-bold mb-4 text-accent-offwhite">Most Viewed Products</h2>
             <apx-chart [series]="productsChartOptions.series" [chart]="productsChartOptions.chart"  [labels]="productsChartOptions.labels"></apx-chart>
         </div>

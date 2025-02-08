@@ -1,3 +1,143 @@
 <div class="h-screen">
-    <router-outlet></router-outlet>
+    <div class="flex flex-col gap-2 p-4">
+
+        <!-- Geenral Settig -->
+         <div class="flex flex-col gap-4 p-4 rounded-t-md bg-primary-dark-slate/80">
+            <h1 class="flex gap-3 mt-4 ml-4 items-center text-accent-yellow font-medium text-2xl">
+                <i class="fas fa-cog"></i>General Settings</h1>
+            <div class="flex  gap-8 p-4">
+                <div class="flex flex-col gap-3 w-1/2">
+                    <label for="text" class="text-white  text-xl ">Meta title</label>
+                    <input type="text" name="metaTitle" placeholder="Enter Meta Title" class="border border-accent-offwhite rounded-md p-4">
+                </div>
+                <div class="flex flex-col gap-2 w-1/2">
+                    <label for="text" class="text-white text-xl">Meta Tag Keyword</label>
+                    <input type="text" name="metaTagKeyword" placeholder="Enter Meta Title" class="border border-accent-offwhite rounded-md p-4">
+                </div>
+            </div>
+            <div class="flex gap-8 p-4">
+                <div class="flex flex-col gap-3 w-1/2">
+                    <label for="text" class="text-white text-xl">Store Themes</label>
+                    <select type="text" name="sectionTheme" placeholder="Enter Section Theme" class="border border-accent-offwhite rounded-md p-4 ">
+                        <option value="dark-theme">Dark Theme</option>
+                        <option value="light-theme">Light Theme</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-3 w-1/2">
+                    <label for="text" class="text-white text-xl">Layout</label>
+                    <select type="text" name="layout" placeholder="Enter Section Theme" class="border border-accent-offwhite rounded-md p-4 ">
+                        <option value="dark-theme">Dark Theme</option>
+                        <option value="light-theme">Light Theme</option>
+                    </select>
+                </div>
+        
+            </div>
+            <div class="flex flex-col gap-3 p-4 ">
+                <label for="text" class="text-white text-xl">Store Themes</label>
+                <textarea type="text" name="sectionTheme" placeholder="Enter Section Theme" class="border border-accent-offwhite rounded-md p-4 h-40"> 
+                </textarea>
+            </div>
+        
+            
+         </div>
+        
+         <!-- Store Settings -->
+          <div class="flex flex-col gap-4 p-4 bg-dark-blue/80">
+            <h1 class="flex gap-3 mt-4 ml-4 items-center text-accent-yellow font-medium text-2xl">
+                <i class="fas fa-store"></i>Store Settings</h1>
+            <div class="flex  gap-8 p-4">
+                <div class="flex flex-col gap-3 w-1/2">
+                    <label for="text" class="text-white  text-xl ">Store Name</label>
+                    <input type="text" name="storeName" placeholder="Enter  Name" class="border border-accent-offwhite rounded-md p-4">
+                </div>
+                <div class="flex flex-col gap-2 w-1/2">
+                    <label for="text" class="text-white text-xl">Store Owner Full Name</label>
+                    <input type="text" name="storeOwner" placeholder="Full Name" class="border border-accent-offwhite rounded-md p-4">
+                </div>
+            </div>
+            <div class="flex gap-8 p-4">
+                <div class="flex flex-col gap-3 w-1/2">
+                    <label for="text" class="text-white text-xl">Owner Phone number</label>
+                    <select type="text" name="phone-number" placeholder=" Section Theme" class="border border-accent-offwhite rounded-md p-4 ">
+                        <option value="primary-number">+(212) 631 756 678</option>
+                    </select>
+                </div>
+                <div class="flex flex-col gap-3 w-1/2">
+                    <label for="text" class="text-white text-xl">Owner Email</label>
+                    <input type="text" name="email" placeholder="Email" class="border border-accent-offwhite rounded-md p-4 ">
+                </div>
+        
+            </div>
+            <div class="flex gap-8 p-4 w-full">
+                <div class="flex flex-col gap-3  w-full">
+                    <label for="text" class="text-white text-xl">Full Addrress </label>
+                    <textarea type="text" name="adrdess" placeholder="Type Address" class="border border-accent-offwhite rounded-md p-4 h-40"> 
+                    </textarea>
+                </div>
+            </div>
+          </div>
+
+          <!-- Shipping Option -->
+           <div class="flex flex-col bg-dark-blue/80 p-4 gap-4">
+            <h1 class="flex gap-3 mt-4 ml-4 items-center text-accent-yellow font-medium text-2xl">
+                <i class="fas fa-shipping-fast"></i>Shipping</h1>
+                <div class="flex gap-8 p-4">
+                    <div class="flex flex-col gap-3 w-1/2">
+                        <label for="text" class="text-white  text-xl ">Shipping Method</label>
+                        <select type="text" name="shippingMethod" placeholder="Enter  Name" class="border border-accent-offwhite rounded-md p-4">
+                            <option value="standard">Standard</option>
+                            <option value="express">Express</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-2 w-1/2">
+                        <label for="text" class="text-white text-xl">Shipping Cost</label>
+                        <input type="text" name="shippingCost" placeholder="Shipping Cost" class="border border-accent-offwhite rounded-md p-4">
+                    </div>
+                </div>
+                <div class="flex gap-8 p-4">
+                    <div class="flex flex-col gap-3 w-1/2">
+                        <label for="text" class="text-white text-xl">Shipping Time</label>
+                        <select type="text" name="shippingTime" placeholder=" Section Theme" class="border border-accent-offwhite rounded-md p-4 ">
+                            <option value="1-2 days">1-2 days</option>
+                            <option value="3-5 days">3-5 days</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3 w-1/2">
+                        <label for="text" class="text-white text-xl">Shipping Region</label>
+                        <input type="text" name="shippingRegion" placeholder="Shipping Region" class="border border-accent-offwhite rounded-md p-4 ">
+                    </div>
+            
+                </div>
+                <div class="flex gap-8 p-4 w-full">
+                    <div class="flex flex-col gap-3  w-full">
+                        <label for="text" class="text-white text-xl">Shipping Address </label>
+                        <textarea type="text" name="shippingAddress" placeholder="Type Address" class="border border-accent-offwhite rounded-md p-4 h-40"> 
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment methode -->
+             <div class="flex flex-col bg-dark-blue/80 gap-4">
+                <h1 class="flex gap-3 mt-4 ml-4 items-center text-accent-yellow font-medium text-2xl">
+                    <i class="fas fa-credit-card"></i>Shipping</h1>
+                <div class="flex gap-8 p-4">
+                    <div class="flex flex-col gap-3 w-1/2">
+                        <label for="text" class="text-white  text-xl ">Payment Method</label>
+                        <select type="text" name="paymentMethod" placeholder="Enter  Name" class="border border-accent-offwhite rounded-md p-4">
+                            <option value="paypal">Paypal</option>
+                            <option value="stripe">Stripe</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-2 w-1/2">
+                        <label for="text" class="text-white text-xl">Payment Cost</label>
+                        <input type="text" name="paymentCost" placeholder="Payment Cost" class="border border-accent-offwhite rounded-md p-4">
+                    </div>
+
+             </div>
+
+  
+        
+        
+        </div>
 </div>
